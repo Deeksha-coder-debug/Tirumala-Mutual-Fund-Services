@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tirumala Mutual Fund Services (TMFS)
 
-## Getting Started
+This is the repository for the **Tirumala Mutual Fund Services** web platform. It is a premium, high-performance financial advisory web application built using **Next.js 15 (App Router)**, **TypeScript**, and **Tailwind CSS v4**.
 
-First, run the development server:
+## 🚀 Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4, Framer Motion
+- **Database**: MongoDB (via Mongoose)
+- **Authentication**: JWT & Jose
+- **Forms & Validation**: React Hook Form, Zod
+- **Email**: Nodemailer
+- **Charts**: Chart.js / React-ChartJS-2
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🗓️ Development Phases
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The project is structured in a phased, milestone-based approach to ensure quality, testing, and continuous delivery.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Phase 1: Core Foundation & UI ✅ (Current Phase)
+- Initialize Next.js 15, TypeScript, Tailwind v4
+- Setup global constants, typography, and styling (Luxury Dark Blue & Gold theme)
+- Build core layout components (`TopBar`, `Navbar`, `Footer`)
+- Develop Homepage sections (Hero, Stats, Services, Testimonials, CTA, Lead Form)
+- Develop the "About Us" page structure
+- Set up SEO, JSON-LD Schema, and PWA configuration
+- Create basic API routing for lead capture
 
-## Learn More
+### Phase 2: Calculators & Core Content (Upcoming)
+- Implement Financial Calculators (SIP, Lumpsum, Retirement, Education, Goal)
+- Build dynamic Service details pages
+- Implement responsive data visualizations with Chart.js
+- Finalize legal pages (Privacy Policy, Terms, Disclaimer)
 
-To learn more about Next.js, take a look at the following resources:
+### Phase 3: Backend & Database Integration
+- Connect MongoDB Atlas
+- Finalize Mongoose models (`User`, `Lead`, `Post`, `Gallery`)
+- Secure API endpoints using custom JWT authentication
+- Implement Nodemailer for automated lead notifications
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Phase 4: Admin Dashboard & CRM
+- Build the secure Admin panel layout
+- Implement Lead Management CRM (view, edit, export leads)
+- Build Content Management System (CMS) for Blog & News
+- Add Analytics Dashboard for traffic and lead conversions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Phase 5: Final Optimization & Deployment
+- Comprehensive testing (Lighthouse, Cross-browser, Mobile)
+- Performance and SEO optimization
+- Final deployment to Vercel
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠️ Getting Started Locally
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd TMFS
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Set up Environment Variables:**
+   Copy the `.env.example` file to `.env` and fill in your credentials.
+   ```bash
+   cp .env.example .env
+   ```
+
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+---
+
+## 🌍 Deployment
+
+This project is optimized for deployment on **Vercel**.
+
+1. Push your code to a Git provider (GitHub, GitLab, or Bitbucket).
+2. Import the repository into your Vercel dashboard.
+3. Configure the Environment Variables in the Vercel project settings matching your `.env` file.
+4. Deploy! Vercel will automatically build and host the application, providing edge caching and image optimization out of the box.
+
+---
+
+## 📞 Contact Information
+
+- **Phone**: +91 87637 32389
+- **Email**: tiru.jeypore@gmail.com
+- **Address**: MR Towers, Flat No. 105, Indira Chowk, Jeypore, Odisha – 764001 (18°51'10.4"N 82°34'40.6"E)
+- **ARN**: ARN-144270 (AMFI Registered Mutual Fund Distributor)
