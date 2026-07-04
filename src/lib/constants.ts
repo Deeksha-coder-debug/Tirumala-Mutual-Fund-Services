@@ -57,12 +57,12 @@ export const SOCIAL_LINKS = {
   youtube: '',
 } as const;
 
-export const STATS = [
+export const STATS: Array<{ value: number; suffix?: string; prefix?: string; label: string; icon: string }> = [
   { value: 15, suffix: '+', label: 'Years Experience', icon: 'Trophy' },
   { value: 300, suffix: '+', label: 'Happy Clients', icon: 'Users' },
   { value: 10, prefix: '₹', suffix: '+ Cr', label: 'Assets Under Management', icon: 'TrendingUp' },
   { value: 100, suffix: '%', label: 'Transparent Advice', icon: 'Shield' },
-] as const;
+];
 
 export const NAVIGATION = [
   { label: 'Home', href: '/' },
