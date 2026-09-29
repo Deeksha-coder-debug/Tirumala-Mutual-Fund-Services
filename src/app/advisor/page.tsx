@@ -1,12 +1,10 @@
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
+import PublicSiteShell from '@/components/layout/PublicSiteShell';
 import { UserCheck, ShieldAlert } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdvisorPage() {
   return (
-    <>
-      <Navbar />
+    <PublicSiteShell>
       <main className="pt-8 pb-16 min-h-screen bg-slate-950 text-white">
         <div className="container-custom py-12 text-center max-w-2xl">
           <div className="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center mx-auto mb-6">
@@ -35,7 +33,6 @@ export default function AdvisorPage() {
           </Link>
         </div>
       </main>
-      <Footer />
-    </>
+    </PublicSiteShell>
   );
 }

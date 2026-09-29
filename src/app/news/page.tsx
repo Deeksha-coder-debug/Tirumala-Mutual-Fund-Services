@@ -1,9 +1,7 @@
 import { Metadata } from 'next';
 import { SectionHeading } from '@/components/ui/section-heading';
 import NewsClient from '@/components/news/NewsClient';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import WhatsAppButton from '@/components/common/WhatsAppButton';
+import PublicSiteShell from '@/components/layout/PublicSiteShell';
 import { CMS_NEWS } from '@/lib/cms-data';
 
 export const metadata: Metadata = {
@@ -19,9 +17,8 @@ export default function NewsPage() {
   const stickyAnnouncement = sortedNews.find(item => item.featured && item.category === 'NFO');
 
   return (
-    <>
-      <Navbar />
-      <main className="pt-8 pb-20 min-h-screen bg-slate-950 text-slate-100">
+    <PublicSiteShell>
+      <main id="main-content" className="pt-8 pb-20 min-h-screen bg-slate-50 dark:bg-dark-1 text-slate-900 dark:text-slate-100">
         {stickyAnnouncement && (
           <div className="bg-primary-950/90 border border-gold-500/30 text-white py-3 px-4 text-sm font-medium text-center relative z-10 shadow-md max-w-5xl mx-auto mb-8 rounded-2xl">
             <span className="bg-red-600 text-white px-2 py-0.5 rounded text-xs font-bold mr-2 uppercase animate-pulse">Important NFO</span>
@@ -41,8 +38,6 @@ export default function NewsPage() {
           </div>
         </div>
       </main>
-      <Footer />
-      <WhatsAppButton />
-    </>
+    </PublicSiteShell>
   );
 }

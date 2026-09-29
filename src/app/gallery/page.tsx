@@ -1,9 +1,7 @@
 import { Metadata } from 'next';
 import { SectionHeading } from '@/components/ui/section-heading';
 import GalleryClient from '@/components/gallery/GalleryClient';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import WhatsAppButton from '@/components/common/WhatsAppButton';
+import PublicSiteShell from '@/components/layout/PublicSiteShell';
 import { CMS_GALLERY } from '@/lib/cms-data';
 
 export const metadata: Metadata = {
@@ -17,9 +15,8 @@ export default function GalleryPage() {
   );
 
   return (
-    <>
-      <Navbar />
-      <main className="pt-8 pb-20 min-h-screen bg-slate-950 text-slate-100">
+    <PublicSiteShell>
+      <main id="main-content" className="pt-8 pb-20 min-h-screen bg-slate-50 dark:bg-dark-1 text-slate-900 dark:text-slate-100">
         <div className="container-custom">
           <SectionHeading 
             title="Our Journey & Media" 
@@ -31,8 +28,6 @@ export default function GalleryPage() {
           </div>
         </div>
       </main>
-      <Footer />
-      <WhatsAppButton />
-    </>
+    </PublicSiteShell>
   );
 }

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { LineChart, Calculator } from 'lucide-react';
+import PublicSiteShell from '@/components/layout/PublicSiteShell';
 
 export default function LumpsumCalculatorPage() {
   const [totalInvestment, setTotalInvestment] = useState(100000);
@@ -20,7 +21,8 @@ export default function LumpsumCalculatorPage() {
   const results = calculateLumpsum();
 
   return (
-    <div className="pt-24 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
+    <PublicSiteShell>
+    <main id="main-content" className="pt-24 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
       <div className="container-custom max-w-5xl">
         <SectionHeading 
           title="Lumpsum Calculator" 
@@ -111,6 +113,7 @@ export default function LumpsumCalculatorPage() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
+    </PublicSiteShell>
   );
 }

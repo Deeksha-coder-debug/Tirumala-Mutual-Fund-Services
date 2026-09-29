@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { LineChart, Sunset } from 'lucide-react';
+import PublicSiteShell from '@/components/layout/PublicSiteShell';
 
 export default function RetirementCalculatorPage() {
   const [currentAge, setCurrentAge] = useState(30);
@@ -32,7 +33,8 @@ export default function RetirementCalculatorPage() {
   const results = calculateRetirement();
 
   return (
-    <div className="pt-24 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
+    <PublicSiteShell>
+    <main id="main-content" className="pt-24 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
       <div className="container-custom max-w-5xl">
         <SectionHeading 
           title="Retirement Planner" 
@@ -118,22 +120,23 @@ export default function RetirementCalculatorPage() {
               
               <div>
                 <p className="text-slate-400 text-sm mb-1">Monthly Expenses after {results.yearsToRetire} years</p>
-                <p className="text-2xl font-semibold text-rose-400">₹{results.futureMonthlyExpense.toLocaleString()}/mo</p>
+                <p className="text-2xl font-semibold text-gold-300">₹{results.futureMonthlyExpense.toLocaleString()}/mo</p>
               </div>
 
               <div className="pt-6 border-t border-slate-700/50">
                 <p className="text-slate-300 text-sm mb-1">Total Retirement Corpus Required</p>
-                <p className="text-4xl font-bold text-indigo-400">₹{(results.requiredCorpus / 10000000).toFixed(2)} Cr</p>
+                <p className="text-4xl font-bold text-gold-400">₹{(results.requiredCorpus / 10000000).toFixed(2)} Cr</p>
                 <p className="text-xs text-slate-500 mt-2">Required Monthly SIP: <strong className="text-white">₹{results.requiredSIP.toLocaleString()}</strong></p>
               </div>
             </div>
 
-            <button className="mt-8 w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-xl transition-colors shadow-lg shadow-indigo-500/20">
+            <button className="mt-8 w-full rounded-xl bg-gold-500 py-3 font-bold text-primary-950 transition-colors hover:bg-gold-400 shadow-lg shadow-gold-500/20">
               Start Retirement SIP
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </main>
+    </PublicSiteShell>
   );
 }

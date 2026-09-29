@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { LineChart, GraduationCap } from 'lucide-react';
+import PublicSiteShell from '@/components/layout/PublicSiteShell';
 
 export default function EducationCalculatorPage() {
   const [currentCost, setCurrentCost] = useState(1000000);
@@ -25,7 +26,8 @@ export default function EducationCalculatorPage() {
   const results = calculateEducation();
 
   return (
-    <div className="pt-24 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
+    <PublicSiteShell>
+    <main id="main-content" className="pt-24 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
       <div className="container-custom max-w-5xl">
         <SectionHeading 
           title="Education Planner" 
@@ -85,7 +87,7 @@ export default function EducationCalculatorPage() {
 
           {/* Results */}
           <div className="glass-card bg-gradient-to-br from-teal-900 to-primary-950 rounded-2xl p-8 shadow-xl text-white flex flex-col justify-center">
-            <h3 className="text-xl font-bold font-heading mb-8 flex items-center gap-2 text-emerald-400">
+            <h3 className="text-xl font-bold font-heading mb-8 flex items-center gap-2 text-gold-400">
               <GraduationCap size={24} />
               Education Fund Projection
             </h3>
@@ -93,7 +95,7 @@ export default function EducationCalculatorPage() {
             <div className="space-y-6">
               <div>
                 <p className="text-slate-400 text-sm mb-1">Estimated Cost in {yearsToCollege} Years</p>
-                <p className="text-3xl font-bold text-emerald-400">₹{results.futureCost.toLocaleString()}</p>
+                <p className="text-3xl font-bold text-gold-400">₹{results.futureCost.toLocaleString()}</p>
               </div>
 
               <div className="pt-6 border-t border-slate-700/50">
@@ -102,12 +104,13 @@ export default function EducationCalculatorPage() {
               </div>
             </div>
 
-            <button className="mt-8 w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-xl transition-colors shadow-lg shadow-emerald-500/20">
+            <button className="mt-8 w-full rounded-xl bg-gold-500 py-3 font-bold text-primary-950 transition-colors hover:bg-gold-400 shadow-lg shadow-gold-500/20">
               Start Education SIP
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </main>
+    </PublicSiteShell>
   );
 }

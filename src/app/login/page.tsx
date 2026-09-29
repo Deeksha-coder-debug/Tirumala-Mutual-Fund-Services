@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { ShieldCheck, Lock, ArrowRight, AlertCircle, Info, Sparkles, UserCheck } from 'lucide-react';
 import { Suspense, useState } from 'react';
 import { SITE_CONFIG } from '@/lib/constants';
+import PublicSiteShell from '@/components/layout/PublicSiteShell';
 
 function LoginContent() {
   const searchParams = useSearchParams();
@@ -34,44 +35,46 @@ function LoginContent() {
   };
 
   return (
-    <div className="w-full max-w-md bg-slate-900/95 backdrop-blur-xl border border-gold-500/30 rounded-3xl p-8 shadow-2xl relative overflow-hidden transition-all duration-300">
-      {/* Background Accent Ambient Glows */}
-      <div className="absolute -top-24 -right-24 w-48 h-48 bg-gold-500/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
-
+    <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-xl sm:p-8">
       {/* Header Badge & Title */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-900 to-slate-900 border border-gold-500/40 mb-4 shadow-xl shadow-gold-500/5 group">
-          <ShieldCheck className="w-9 h-9 text-gold-400 group-hover:scale-110 transition-transform duration-300" />
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl border border-gold-200 bg-gold-50 text-gold-700">
+          <ShieldCheck className="h-7 w-7" />
         </div>
-        <h1 className="text-2xl md:text-3xl font-extrabold text-white font-heading tracking-wide">
+        <h1 className="font-heading text-2xl font-bold !text-primary-950 sm:text-3xl">
           Investor Portal Sign In
         </h1>
-        <p className="text-slate-300 text-sm mt-2 font-medium">
+        <p className="mt-2 text-sm font-medium text-slate-600">
           Access your personal wealth portfolio & advisory updates
         </p>
       </div>
 
       {/* Notice Box if OAuth credentials are not set in environment */}
       {error === 'Configuration' && (
-        <div className="mb-6 p-4 rounded-2xl bg-slate-800/90 border border-gold-500/40 text-slate-200 text-xs space-y-2 shadow-lg">
-          <div className="flex items-center gap-2 text-gold-400 font-bold">
+        <div className="mb-6 space-y-2 rounded-xl border border-gold-200 bg-[#f6f3ea] p-4 text-xs text-primary-900">
+          <div className="flex items-center gap-2 font-bold text-gold-800">
             <Info className="w-4 h-4 shrink-0" />
-            <span>OAuth Setup Environment Notice</span>
+            <span>Google Sign-In Setup</span>
           </div>
-          <p className="text-slate-300 leading-relaxed">
-            Live Google Sign-In requires your <code className="bg-slate-950 px-1.5 py-0.5 rounded text-gold-300 font-mono text-[11px]">AUTH_GOOGLE_ID</code> credentials in <code className="bg-slate-950 px-1.5 py-0.5 rounded text-gold-300 font-mono text-[11px]">.env</code>.
+          <p className="leading-relaxed text-slate-700">
+            Google could not complete sign-in. Check the server-side OAuth client ID, client secret, and Auth secret. In Google Cloud Console, add this authorized redirect URI for local development:
+          </p>
+          <code className="block break-all rounded-lg bg-white px-2 py-1.5 font-mono text-[11px] text-primary-800">
+            http://localhost:3000/api/auth/callback/google
+          </code>
+          <p className="leading-relaxed text-slate-600">
+            For production, add the matching callback URL using your deployed site&apos;s domain.
           </p>
         </div>
       )}
 
       {/* Other Auth Error Alerts */}
       {error && error !== 'Configuration' && (
-        <div className="mb-6 p-3.5 rounded-xl bg-red-950/80 border border-red-500/40 text-red-300 text-sm flex items-start gap-2.5 shadow-md">
+        <div className="mb-6 flex items-start gap-2.5 rounded-xl border border-red-200 bg-red-50 p-3.5 text-sm text-red-800">
           <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
           <div>
-            <p className="font-semibold text-xs">Authentication Alert</p>
-            <p className="text-xs text-red-200 mt-0.5">
+            <p className="text-xs font-semibold">Authentication Alert</p>
+            <p className="mt-0.5 text-xs text-red-700">
               {error === 'OAuthAccountNotLinked'
                 ? 'An account with this email already exists under a different sign-in method.'
                 : 'Authentication attempt could not be completed. Please try again.'}
@@ -85,7 +88,7 @@ function LoginContent() {
         <button
           onClick={handleGoogleSignIn}
           disabled={isLoading}
-          className="w-full h-14 p-1.5 pr-5 rounded-full bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 active:scale-[0.98] text-white font-semibold flex items-center justify-between transition-all duration-300 shadow-xl shadow-blue-600/30 hover:shadow-blue-500/40 group cursor-pointer relative overflow-hidden border border-blue-400/30 disabled:opacity-80"
+          className="group relative flex h-14 w-full items-center justify-between overflow-hidden rounded-xl border border-primary-800 bg-primary-900 p-1.5 pr-5 font-semibold text-white shadow-md transition-colors hover:bg-primary-800 active:scale-[0.98] disabled:opacity-80"
         >
           {/* Left Circular White Google Badge */}
           <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform duration-300">
@@ -124,7 +127,7 @@ function LoginContent() {
         {process.env.NODE_ENV !== 'production' && (
           <button
             onClick={handleDemoSignIn}
-            className="w-full py-3 px-4 rounded-full bg-slate-800/90 hover:bg-slate-800 text-gold-400 hover:text-gold-300 border border-gold-500/30 text-xs font-bold flex items-center justify-center gap-2 transition-all duration-300 shadow-md cursor-pointer"
+            className="flex w-full items-center justify-center gap-2 rounded-xl border border-gold-300 bg-gold-50 px-4 py-3 text-xs font-bold text-gold-800 transition-colors hover:bg-gold-100 cursor-pointer"
           >
             <Sparkles className="w-4 h-4 text-gold-400" />
             <span>Explore Investor Portal (Demo Mode)</span>
@@ -133,19 +136,19 @@ function LoginContent() {
       </div>
 
       {/* Security Badge */}
-      <div className="mt-6 flex items-center justify-center gap-2 text-xs text-slate-300 font-medium">
-        <Lock className="w-3.5 h-3.5 text-gold-400" />
+      <div className="mt-6 flex items-center justify-center gap-2 text-xs font-medium text-slate-600">
+        <Lock className="h-3.5 w-3.5 text-gold-700" />
         <span>Bank-grade 256-bit SSL encrypted authentication</span>
       </div>
 
       {/* Legal Disclaimer */}
-      <div className="mt-8 pt-6 border-t border-slate-800 text-center text-xs text-slate-400">
+      <div className="mt-8 border-t border-slate-200 pt-6 text-center text-xs text-slate-600">
         By continuing, you agree to our{' '}
-        <Link href="/terms" className="text-gold-400 hover:text-gold-300 font-semibold underline">
+        <Link href="/terms" className="font-semibold text-primary-800 underline hover:text-gold-700">
           Terms of Service
         </Link>{' '}
         and{' '}
-        <Link href="/privacy" className="text-gold-400 hover:text-gold-300 font-semibold underline">
+        <Link href="/privacy" className="font-semibold text-primary-800 underline hover:text-gold-700">
           Privacy Policy
         </Link>
         .
@@ -156,40 +159,38 @@ function LoginContent() {
 
 export default function LoginPage() {
   return (
-    <main className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 relative overflow-hidden">
-      {/* Background Decorative Pattern */}
-      <div className="absolute inset-0 opacity-25 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-primary-900/30 via-gold-500/10 to-transparent rounded-full blur-[140px] pointer-events-none" />
-
-      {/* Header Logo */}
-      <Link href="/" className="mb-8 flex items-center gap-3 group">
-        <div className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-gold-400/40 bg-white p-0.5 shadow-lg group-hover:scale-105 transition-transform duration-300">
-          <Image
-            src={SITE_CONFIG.logo}
-            alt="TMFS Logo"
-            fill
-            sizes="40px"
-            className="object-contain"
-          />
-        </div>
-        <span className="text-xl font-bold tracking-tight text-white group-hover:text-gold-400 transition-colors font-heading">
-          Tirumala Mutual Fund Services
-        </span>
-      </Link>
-
-      <Suspense
-        fallback={
-          <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-8 text-center text-slate-300">
-            Loading authentication portal...
+    <PublicSiteShell>
+      <main id="main-content" className="flex min-h-[calc(100vh-68px)] flex-col items-center justify-center bg-[#f6f3ea] px-4 py-12 text-primary-950 md:min-h-[calc(100vh-76px)]">
+        {/* Header Logo */}
+        <Link href="/" className="group mb-8 flex items-center gap-3">
+          <div className="relative h-10 w-10 overflow-hidden rounded-full border border-gold-300 bg-white p-0.5 transition-transform duration-300 group-hover:scale-105">
+            <Image
+              src={SITE_CONFIG.logo}
+              alt="TMFS Logo"
+              fill
+              sizes="40px"
+              className="object-contain"
+            />
           </div>
-        }
-      >
-        <LoginContent />
-      </Suspense>
+          <span className="font-heading text-xl font-bold tracking-tight text-primary-950 transition-colors group-hover:text-gold-700">
+            Tirumala Mutual Fund Services
+          </span>
+        </Link>
 
-      <div className="mt-8 text-xs text-slate-400 font-medium tracking-wide">
-        AMFI Registered Mutual Fund Distributor • ARN-144270
-      </div>
-    </main>
+        <Suspense
+          fallback={
+            <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-8 text-center text-slate-600">
+              Loading authentication portal...
+            </div>
+          }
+        >
+          <LoginContent />
+        </Suspense>
+
+        <div className="mt-8 text-xs font-medium tracking-wide text-slate-600">
+          AMFI Registered Mutual Fund Distributor • ARN-144270
+        </div>
+      </main>
+    </PublicSiteShell>
   );
 }

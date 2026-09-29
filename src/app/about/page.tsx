@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import WhatsAppButton from '@/components/common/WhatsAppButton';
+import PublicSiteShell from '@/components/layout/PublicSiteShell';
 import AboutContent from './AboutContent';
 
 export const metadata: Metadata = {
@@ -11,13 +9,10 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <>
-      <Navbar />
+    <PublicSiteShell>
       <main id="main-content">
         <AboutContent />
       </main>
-      <Footer />
-      <WhatsAppButton />
-    </>
+    </PublicSiteShell>
   );
 }

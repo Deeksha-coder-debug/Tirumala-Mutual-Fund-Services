@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft, MapPin, Calendar, Users, Award, ShieldCheck, Download, Share2 } from 'lucide-react';
 import { CMS_GALLERY } from '@/lib/cms-data';
 import { SectionHeading } from '@/components/ui/section-heading';
+import PublicSiteShell from '@/components/layout/PublicSiteShell';
 
 interface GalleryItemPageProps {
   params: {
@@ -50,12 +51,12 @@ export default function GalleryItemPage({ params }: GalleryItemPageProps) {
   };
 
   return (
-    <>
+    <PublicSiteShell>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <main className="pt-24 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
+      <main id="main-content" className="pt-8 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
         <div className="container-custom max-w-5xl">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-8">
@@ -148,6 +149,6 @@ export default function GalleryItemPage({ params }: GalleryItemPageProps) {
           </div>
         </div>
       </main>
-    </>
+    </PublicSiteShell>
   );
 }

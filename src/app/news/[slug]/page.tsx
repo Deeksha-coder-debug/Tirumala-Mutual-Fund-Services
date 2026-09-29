@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, User, Tag, Download, Share2, TrendingUp, AlertTriangle, FileText } from 'lucide-react';
 import { CMS_NEWS } from '@/lib/cms-data';
 import { NfoCard, IpoCard, NewsCard } from '@/components/news/NewsCards';
+import PublicSiteShell from '@/components/layout/PublicSiteShell';
 
 interface NewsItemPageProps {
   params: {
@@ -50,12 +51,12 @@ export default function NewsItemPage({ params }: NewsItemPageProps) {
   const relatedItems = CMS_NEWS.filter(n => n.id !== item.id).slice(0, 3);
 
   return (
-    <>
+    <PublicSiteShell>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <main className="pt-24 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
+      <main id="main-content" className="pt-8 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
         <div className="container-custom max-w-4xl">
           {/* Breadcrumbs */}
           <nav className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-8 overflow-x-auto whitespace-nowrap">
@@ -226,6 +227,6 @@ export default function NewsItemPage({ params }: NewsItemPageProps) {
           </div>
         )}
       </main>
-    </>
+    </PublicSiteShell>
   );
 }

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { LineChart, Target } from 'lucide-react';
+import PublicSiteShell from '@/components/layout/PublicSiteShell';
 
 export default function GoalCalculatorPage() {
   const [targetAmount, setTargetAmount] = useState(5000000);
@@ -23,7 +24,8 @@ export default function GoalCalculatorPage() {
   const results = calculateGoal();
 
   return (
-    <div className="pt-24 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
+    <PublicSiteShell>
+    <main id="main-content" className="pt-24 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
       <div className="container-custom max-w-5xl">
         <SectionHeading 
           title="Financial Goal Planner" 
@@ -77,7 +79,7 @@ export default function GoalCalculatorPage() {
 
           {/* Results */}
           <div className="glass-card bg-gradient-to-br from-teal-900 to-primary-950 rounded-2xl p-8 shadow-xl text-white flex flex-col justify-center">
-            <h3 className="text-xl font-bold font-heading mb-8 flex items-center gap-2 text-orange-400">
+            <h3 className="text-xl font-bold font-heading mb-8 flex items-center gap-2 text-gold-400">
               <Target size={24} />
               Goal Investment Strategy
             </h3>
@@ -91,16 +93,17 @@ export default function GoalCalculatorPage() {
               <div className="pt-6 border-t border-slate-700/50">
                 <p className="text-slate-300 text-sm mb-1">Required Monthly SIP</p>
                 <p className="text-4xl font-bold text-white">₹{results.requiredSIP.toLocaleString()}</p>
-                <p className="text-xs text-slate-400 mt-2">You will earn <strong className="text-emerald-400">₹{results.wealthGained.toLocaleString()}</strong> in returns over {yearsToGoal} years.</p>
+                <p className="text-xs text-slate-400 mt-2">You will earn <strong className="text-teal-300">₹{results.wealthGained.toLocaleString()}</strong> in returns over {yearsToGoal} years.</p>
               </div>
             </div>
 
-            <button className="mt-8 w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition-colors shadow-lg shadow-orange-500/20">
+            <button className="mt-8 w-full rounded-xl bg-gold-500 py-3 font-bold text-primary-950 transition-colors hover:bg-gold-400 shadow-lg shadow-gold-500/20">
               Start Goal SIP
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </main>
+    </PublicSiteShell>
   );
 }

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { LineChart, Calculator } from 'lucide-react';
+import PublicSiteShell from '@/components/layout/PublicSiteShell';
 
 export default function SIPCalculatorPage() {
   const [monthlyInvestment, setMonthlyInvestment] = useState(10000);
@@ -24,7 +25,8 @@ export default function SIPCalculatorPage() {
   const results = calculateSIP();
 
   return (
-    <div className="pt-24 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
+    <PublicSiteShell>
+    <main id="main-content" className="pt-24 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
       <div className="container-custom max-w-5xl">
         <SectionHeading 
           title="SIP Calculator" 
@@ -115,6 +117,7 @@ export default function SIPCalculatorPage() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
+    </PublicSiteShell>
   );
 }
