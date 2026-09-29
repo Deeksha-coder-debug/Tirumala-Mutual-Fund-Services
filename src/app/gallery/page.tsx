@@ -21,6 +21,8 @@ export default function GalleryPage() {
           <SectionHeading 
             title="Our Journey & Media" 
             subtitle="Building financial literacy, celebrating milestones, and fostering trust within our investor community."
+            titleClassName="!text-primary-950"
+            subtitleClassName="!text-slate-700"
           />
           
           <div className="mt-12">

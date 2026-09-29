@@ -6,6 +6,7 @@ import { SectionHeading } from '@/components/ui/section-heading';
 import { Badge } from '@/components/ui/badge';
 import { Quote, Award, CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
+import { BUSINESS_INFO } from '@/lib/constants';
 
 export default function MeetYourAdvisor() {
   const { ref, inView } = useInView({
@@ -33,28 +34,32 @@ export default function MeetYourAdvisor() {
             {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gold-500/10 dark:bg-gold-500/5 blur-[100px] rounded-full pointer-events-none" />
             
-            <div className="relative rounded-3xl overflow-hidden bg-slate-100 dark:bg-slate-900 aspect-[4/5] border border-slate-200 dark:border-slate-800 shadow-2xl group">
+            <div className="relative rounded-3xl overflow-hidden bg-slate-100 dark:bg-slate-900 aspect-[3/2] border-2 border-gold-400/40 dark:border-gold-500/30 shadow-2xl group">
               <Image 
-                src="/images/director.jpeg" 
-                alt="Tirumala Talabaktula - Founder & Principal Advisor" 
+                src={BUSINESS_INFO.directorImage} 
+                alt="Tirumala Talabaktula - Founder & Principal Advisor with TMFS in background" 
                 fill 
-                className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain sm:object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
+                priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10" />
-              
-              {/* Floating Badge Bottom Left */}
-              <div className="absolute bottom-6 left-6 z-20">
-                <div className="bg-white/95 dark:bg-slate-900/95 p-4 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 backdrop-blur-md">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gold-50 dark:bg-gold-500/20 border border-gold-200 dark:border-gold-500/30 flex items-center justify-center text-gold-600 dark:text-gold-400">
-                      <Award size={20} />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-slate-900 dark:text-white">AMFI Certified</p>
-                      <p className="text-xs text-slate-600 dark:text-slate-400">Mutual Fund Distributor</p>
-                    </div>
+            </div>
+
+            {/* Credential Badge below photo so TMFS branding is completely unobscured */}
+            <div className="mt-4">
+              <div className="bg-white/95 dark:bg-slate-900/95 p-4 rounded-2xl shadow-md border border-slate-200 dark:border-slate-800 backdrop-blur-md flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gold-50 dark:bg-gold-500/20 border border-gold-200 dark:border-gold-500/30 flex items-center justify-center text-gold-600 dark:text-gold-400 shrink-0">
+                    <Award size={20} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-slate-900 dark:text-white">AMFI Certified Mutual Fund Distributor</p>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">ARN-144270 • 15+ Years Wealth Stewardship</p>
                   </div>
                 </div>
+                <Badge variant="glass" className="hidden sm:inline-flex text-[11px] font-bold text-gold-600 dark:text-gold-400 border-gold-300">
+                  Verified
+                </Badge>
               </div>
             </div>
           </motion.div>

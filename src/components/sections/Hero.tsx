@@ -58,7 +58,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8"
         >
           <Link
-            href="/contact"
+            href="/#contact"
             className="w-full sm:w-auto bg-gradient-to-r from-gold-500 to-amber-600 hover:from-gold-400 hover:to-amber-500 text-slate-950 font-extrabold px-8 py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 shadow-xl shadow-gold-500/20 border border-gold-400/40"
           >
             <span className="material-symbols-outlined text-[20px]">event</span>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -14,6 +14,13 @@ import { CMS_GALLERY, CMS_NEWS, GalleryItem, NewsItem } from '@/lib/cms-data';
 export default function AdminPage() {
   const { data: session } = useSession();
   const [activeTab, setActiveTab] = useState<'dashboard' | 'portfolio' | 'sips' | 'investors' | 'gallery' | 'news'>('dashboard');
+
+  useEffect(() => {
+    document.documentElement.classList.remove('dark');
+    return () => {
+      document.documentElement.classList.add('dark');
+    };
+  }, []);
 
   // User details
   const user = session?.user || {
@@ -99,7 +106,7 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 !text-slate-900 font-sans flex flex-col">
+    <div data-theme="light" className="light-theme min-h-screen bg-slate-50 !text-slate-900 font-sans flex flex-col">
       {/* Top Navbar Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-50 px-6 py-3.5 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-3">
@@ -350,21 +357,21 @@ export default function AdminPage() {
 
                 {/* Upcoming Features Grid */}
                 <div className="pt-6">
-                  <p className="text-[11px] font-extrabold uppercase tracking-widest !text-slate-400 mb-4">
+                  <p className="text-[11px] font-extrabold uppercase tracking-widest !text-slate-600 mb-4">
                     UPCOMING FEATURES
                   </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-bold !text-slate-600">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-bold !text-slate-800">
                     <div className="flex items-center gap-2">
-                      <BarChart3 className="w-4 h-4 text-slate-400" />
-                      <span>Interactive SIP Charts</span>
+                      <BarChart3 className="w-4 h-4 text-slate-700" />
+                      <span className="!text-slate-800 font-semibold">Interactive SIP Charts</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <FileText className="w-4 h-4 text-slate-400" />
-                      <span>Tax Statements</span>
+                      <FileText className="w-4 h-4 text-slate-700" />
+                      <span className="!text-slate-800 font-semibold">Tax Statements</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <MessageSquare className="w-4 h-4 text-slate-400" />
-                      <span>Direct Advisor Messaging</span>
+                      <MessageSquare className="w-4 h-4 text-slate-700" />
+                      <span className="!text-slate-800 font-semibold">Direct Advisor Messaging</span>
                     </div>
                   </div>
                 </div>
@@ -376,8 +383,8 @@ export default function AdminPage() {
           {activeTab === 'portfolio' && (
             <div className="bg-white border border-slate-200/80 rounded-2xl p-8 shadow-sm space-y-6">
               <h3 className="text-xl font-extrabold !text-slate-950 font-heading">Client Portfolio Overview</h3>
-              <p className="!text-slate-600 text-sm font-medium">Real-time mutual fund holdings and AUM breakdown across funds.</p>
-              <div className="p-8 bg-slate-50 rounded-xl border border-dashed border-slate-300 text-center !text-slate-500 font-semibold text-sm">
+              <p className="!text-slate-700 text-sm font-medium">Real-time mutual fund holdings and AUM breakdown across funds.</p>
+              <div className="p-8 bg-slate-50 rounded-xl border border-dashed border-slate-300 text-center !text-slate-700 font-bold text-sm">
                 AUM Analytics & Live Fund NAV Integration Active
               </div>
             </div>
@@ -387,8 +394,8 @@ export default function AdminPage() {
           {activeTab === 'sips' && (
             <div className="bg-white border border-slate-200/80 rounded-2xl p-8 shadow-sm space-y-6">
               <h3 className="text-xl font-extrabold !text-slate-950 font-heading">Active SIP Registers</h3>
-              <p className="!text-slate-600 text-sm font-medium">Systematic Investment Plan records and monthly mandate schedules.</p>
-              <div className="p-8 bg-slate-50 rounded-xl border border-dashed border-slate-300 text-center !text-slate-500 font-semibold text-sm">
+              <p className="!text-slate-700 text-sm font-medium">Systematic Investment Plan records and monthly mandate schedules.</p>
+              <div className="p-8 bg-slate-50 rounded-xl border border-dashed border-slate-300 text-center !text-slate-700 font-bold text-sm">
                 Automated SIP Mandate Tracker Ready
               </div>
             </div>
@@ -398,8 +405,8 @@ export default function AdminPage() {
           {activeTab === 'investors' && (
             <div className="bg-white border border-slate-200/80 rounded-2xl p-8 shadow-sm space-y-6">
               <h3 className="text-xl font-extrabold !text-slate-950 font-heading">Registered Investors & Leads</h3>
-              <p className="!text-slate-600 text-sm font-medium">Manage client consultations and investor onboarding.</p>
-              <div className="p-8 bg-slate-50 rounded-xl border border-dashed border-slate-300 text-center !text-slate-500 font-semibold text-sm">
+              <p className="!text-slate-700 text-sm font-medium">Manage client consultations and investor onboarding.</p>
+              <div className="p-8 bg-slate-50 rounded-xl border border-dashed border-slate-300 text-center !text-slate-700 font-bold text-sm">
                 Investor CRM Database Loaded
               </div>
             </div>

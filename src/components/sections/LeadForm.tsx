@@ -52,10 +52,12 @@ export default function LeadForm() {
   return (
     <section
       ref={ref}
-      className="section-padding !pt-6 !pb-16 sm:!pt-8 sm:!pb-20 lg:!pt-8 lg:!pb-24 bg-slate-50 dark:bg-slate-950 transition-colors"
-      id="enquiry"
-      aria-label="Enquiry form"
+      className="section-padding !pt-6 !pb-16 sm:!pt-8 sm:!pb-20 lg:!pt-8 lg:!pb-24 bg-slate-50 dark:bg-slate-950 transition-colors scroll-mt-20 md:scroll-mt-24"
+      id="contact"
+      aria-label="Contact and enquiry form"
     >
+      <div id="enquiry" className="-mt-20 pt-20 md:-mt-24 md:pt-24" aria-hidden="true" />
+      <div id="start-investing" className="-mt-20 pt-20 md:-mt-24 md:pt-24" aria-hidden="true" />
       <div className="container-custom max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -171,7 +173,7 @@ export default function LeadForm() {
           {/* Consultation actions moved from the banner to follow the form. */}
           <div className="mx-auto mt-6 grid w-full max-w-2xl grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Link
-              href="/contact"
+              href="#contact"
               className="group col-span-full flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-gold-500 px-6 py-3.5 text-center text-sm font-extrabold text-primary-950 shadow-lg shadow-gold-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-400 sm:text-base"
             >
               Book Free Consultation

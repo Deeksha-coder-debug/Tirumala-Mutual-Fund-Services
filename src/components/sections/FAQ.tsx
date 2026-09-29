@@ -39,9 +39,11 @@ export default function FAQ() {
   return (
     <section
       ref={ref}
-      className="section-padding bg-white dark:bg-slate-950 transition-colors"
+      id="faq"
+      className="section-padding bg-white dark:bg-slate-950 transition-colors scroll-mt-20 md:scroll-mt-24"
       aria-label="Frequently Asked Questions"
     >
+      <div id="faqs" className="-mt-20 pt-20 md:-mt-24 md:pt-24" aria-hidden="true" />
       <div className="container-custom max-w-4xl">
         {/* Heading */}
         <motion.div

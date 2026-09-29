@@ -69,7 +69,7 @@ export default function NotFound() {
             Go Home
           </Link>
           <Link
-            href="/contact"
+            href="/#contact"
             className="flex items-center gap-2 bg-white dark:bg-white/5 hover:bg-slate-50 dark:hover:bg-white/10 backdrop-blur-xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-white px-7 py-3.5 rounded-full font-semibold shadow-sm transition-all duration-300 hover:-translate-y-0.5"
           >
             <Phone size={18} />
@@ -89,7 +89,7 @@ export default function NotFound() {
             { label: 'Services', href: '/services' },
             { label: 'Calculators', href: '/calculators/sip' },
             { label: 'Blog', href: '/blog' },
-            { label: 'FAQs', href: '/faq' },
+            { label: 'FAQs', href: '/#faq' },
           ].map((link) => (
             <Link
               key={link.href}

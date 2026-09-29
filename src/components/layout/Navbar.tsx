@@ -247,7 +247,7 @@ export default function Navbar() {
                   size="sm"
                   className="group rounded-full px-5 !border !border-gold-400/70 !bg-gradient-to-r !from-teal-600 !to-teal-500 !text-white shadow-lg shadow-teal-950/40 ring-1 ring-gold-400/20 hover:!from-teal-500 hover:!to-teal-400 hover:shadow-xl hover:shadow-teal-950/50"
                 >
-                  <Link href="/contact">
+                  <Link href="/#contact">
                     Start Investing
                     <ArrowUpRight className="ml-1.5 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
@@ -445,7 +445,7 @@ export default function Navbar() {
                   </Button>
                 )}
                 <Button asChild className="w-full h-12 rounded-xl font-bold">
-                  <Link href="/contact" onClick={toggleMobile}>
+                  <Link href="/#contact" onClick={toggleMobile}>
                     <Phone size={16} className="mr-2" />
                     Start Investing
                   </Link>

@@ -98,7 +98,7 @@ export default function NewsClient({ items }: NewsClientProps) {
                       <div className="absolute top-0 right-0 w-64 h-64 bg-gold-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                       <h3 className="text-2xl font-bold font-heading mb-3 relative z-10">Need Expert Investment Advice?</h3>
                       <p className="text-primary-100 mb-6 max-w-2xl mx-auto relative z-10">Our certified wealth managers are here to help you navigate market opportunities and build a resilient portfolio.</p>
-                      <Link href="/contact" className="inline-block bg-gold-500 hover:bg-gold-400 text-gray-900 font-bold py-3 px-8 rounded-xl transition-colors relative z-10">
+                      <Link href="/#contact" className="inline-block bg-gold-500 hover:bg-gold-400 text-gray-900 font-bold py-3 px-8 rounded-xl transition-colors relative z-10">
                         Book a Free Consultation
                       </Link>
                     </motion.div>

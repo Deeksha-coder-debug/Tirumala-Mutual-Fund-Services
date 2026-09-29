@@ -16,8 +16,8 @@ const quickLinks = [
   { label: 'News & NFOs', href: '/news' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Blog', href: '/blog' },
-  { label: 'FAQs', href: '/faq' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'FAQs', href: '/#faq' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 const serviceLinks = [

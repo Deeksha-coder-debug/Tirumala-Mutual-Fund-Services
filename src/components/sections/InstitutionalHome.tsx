@@ -54,7 +54,7 @@ export default function InstitutionalHome() {
 
               <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                 <Link
-                  href="/contact"
+                  href="/#contact"
                   className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-gold-500 px-6 py-3 text-center text-sm font-bold text-primary-950 shadow-md transition-colors hover:bg-gold-400 sm:w-auto sm:text-[15px]"
                 >
                   <span>Schedule a Wealth Consultation</span>
@@ -77,21 +77,21 @@ export default function InstitutionalHome() {
                 className="w-full max-w-md rounded-2xl border border-gold-400/25 bg-white p-6 text-left text-primary-950 shadow-[0_18px_45px_-28px_rgba(0,0,0,0.7)] sm:p-7"
               >
                 <div className="flex items-center justify-between gap-3 border-b border-slate-200 pb-4">
-                  <div className="flex min-w-0 items-center gap-3">
-                    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gold-400/60 bg-white p-0.5">
+                  <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+                    <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 overflow-hidden rounded-full border-2 border-gold-400 bg-slate-100 shadow-lg ring-2 ring-gold-400/30">
                       <Image
-                        src={SITE_CONFIG.logo}
-                        alt="Tirumala Mutual Fund Services logo"
+                        src={BUSINESS_INFO.directorImage}
+                        alt="Sri Tirumala Talabaktula - Founder & Principal Advisor"
                         fill
-                        sizes="40px"
-                        className="object-contain"
+                        sizes="(max-width: 640px) 64px, 80px"
+                        className="object-cover object-top"
                       />
                     </div>
                     <div className="min-w-0">
                       <span className="block text-[10px] font-bold uppercase tracking-wider text-gold-700">
                         Senior Wealth Stewardship
                       </span>
-                      <h3 className="whitespace-nowrap font-sans text-[15px] font-bold leading-snug !text-primary-950">Sri Tirumala Talabaktula</h3>
+                      <h3 className="whitespace-nowrap font-sans text-base sm:text-lg font-bold leading-snug !text-primary-950">Sri Tirumala Talabaktula</h3>
                       <p className="text-xs text-slate-600">
                         Principal Wealth Strategist<br />
                         Jeypore, Odisha
@@ -323,7 +323,7 @@ export default function InstitutionalHome() {
                   Specialized mandates for High-Net-Worth families (ticket sizes ₹50L+) focusing on unconstrained stock selection, thematic opportunities, and pre-IPO debt structures.
                 </p>
               </div>
-              <Link href="/contact" className="flex items-center gap-2 text-sm font-bold text-primary-800 transition-colors group-hover:text-gold-700">
+              <Link href="/#contact" className="flex items-center gap-2 text-sm font-bold text-primary-800 transition-colors group-hover:text-gold-700">
                 <span>HNI Wealth Inquiries</span>
                 <span className="material-symbols-outlined text-[16px]">east</span>
               </Link>
@@ -495,7 +495,7 @@ export default function InstitutionalHome() {
                 </div>
 
                 <Link
-                  href="/contact"
+                  href="/#contact"
                   className="w-full py-3.5 text-center bg-gold-500 text-primary-950 font-bold text-sm rounded-lg hover:bg-gold-600 transition-all shadow-md block"
                 >
                   Start Your SIP Journey Today →

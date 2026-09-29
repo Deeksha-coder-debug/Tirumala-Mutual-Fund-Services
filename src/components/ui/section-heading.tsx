@@ -6,6 +6,8 @@ interface SectionHeadingProps {
   subtitle?: string;
   alignment?: 'left' | 'center' | 'right';
   className?: string;
+  titleClassName?: string;
+  subtitleClassName?: string;
 }
 
 export function SectionHeading({
@@ -13,6 +15,8 @@ export function SectionHeading({
   subtitle,
   alignment = 'center',
   className,
+  titleClassName,
+  subtitleClassName,
 }: SectionHeadingProps) {
   return (
     <div
@@ -26,17 +30,17 @@ export function SectionHeading({
         className
       )}
     >
-      <h2 className="section-title text-slate-900 dark:text-white font-extrabold">
+      <h2 className={cn("section-title font-extrabold text-slate-900 dark:text-white", titleClassName)}>
         {title}
       </h2>
       <div 
-        className={cn("h-1 w-20 rounded-full my-4 bg-gradient-to-r from-primary-600 to-primary-500 dark:from-gold-400 dark:to-gold-600", {
+        className={cn("h-1 w-20 rounded-full my-4 bg-gradient-to-r from-gold-500 to-amber-500", {
           'mx-auto': alignment === 'center',
           'ml-auto': alignment === 'right'
         })}
       />
       {subtitle && (
-        <p className="text-body max-w-2xl text-slate-600 dark:text-slate-300 mt-2 font-medium">
+        <p className={cn("text-body max-w-2xl mt-2 font-medium text-slate-600 dark:text-slate-300", subtitleClassName)}>
           {subtitle}
         </p>
       )}

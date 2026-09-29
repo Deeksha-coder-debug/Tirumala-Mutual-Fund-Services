@@ -31,6 +31,8 @@ export default function NewsPage() {
           <SectionHeading 
             title="News, NFOs & Market Updates" 
             subtitle="Expert financial analysis, mutual fund scheme launches, IPO insights, and tax guidelines."
+            titleClassName="!text-primary-950"
+            subtitleClassName="!text-slate-700"
           />
           
           <div className="mt-12">

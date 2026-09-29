@@ -6,11 +6,13 @@ import { SectionHeading } from '@/components/ui/section-heading';
 
 export default function AboutContent() {
   return (
-    <div className="pt-32 md:pt-40 pb-20 min-h-screen bg-slate-50 dark:bg-dark-1">
+    <div className="pt-10 sm:pt-14 md:pt-16 pb-20 min-h-screen bg-slate-50 dark:bg-dark-1">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading 
           title="About Us" 
           subtitle="Building wealth and financial freedom through disciplined investing and trusted financial advice."
+          titleClassName="!text-primary-950"
+          subtitleClassName="!text-slate-700"
         />
         
         <div className="glass-card bg-white dark:bg-slate-900 rounded-2xl p-8 md:p-10 shadow-lg border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 leading-relaxed mb-20">

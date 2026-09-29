@@ -195,8 +195,30 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
-.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
   color: #ffffff;
+}
+
+/* Light theme and light surfaces must maintain high-contrast dark text even if .dark class is on html */
+.light-theme,
+[data-theme="light"] {
+  color-scheme: light;
+  color: #0f172a !important;
+}
+
+.light-theme h1, .light-theme h2, .light-theme h3, .light-theme h4, .light-theme h5, .light-theme h6,
+[data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3, [data-theme="light"] h4, [data-theme="light"] h5, [data-theme="light"] h6 {
+  color: #061426 !important;
+}
+
+.light-theme p,
+[data-theme="light"] p {
+  color: #334155 !important;
 }
 
 /* Specific Sizes */

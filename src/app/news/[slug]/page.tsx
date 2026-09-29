@@ -197,7 +197,7 @@ export default function NewsItemPage({ params }: NewsItemPageProps) {
             <p className="text-primary-100 mb-6 max-w-2xl mx-auto relative z-10">
               Speak to our certified wealth managers to understand how this fits into your personalized financial plan.
             </p>
-            <Link href="/contact" className="inline-block bg-gold-500 hover:bg-gold-400 text-gray-900 font-bold py-3 px-8 rounded-xl transition-colors relative z-10">
+            <Link href="/#contact" className="inline-block bg-gold-500 hover:bg-gold-400 text-gray-900 font-bold py-3 px-8 rounded-xl transition-colors relative z-10">
               Book a Free Consultation
             </Link>
           </div>

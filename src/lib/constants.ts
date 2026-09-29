@@ -23,7 +23,7 @@ export const BUSINESS_INFO = {
   clients: '300+',
   aum: '₹10+ Crore',
   managingDirector: 'Mr. Tirumala Talabaktula',
-  directorImage: '/images/director.jpeg',
+  directorImage: '/images/director.png',
 } as const;
 
 export const CONTACT_INFO = {
@@ -111,8 +111,8 @@ export const NAVIGATION = [
   { label: 'News & NFOs', href: '/news' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Visit Our Office', href: OFFICE_MAP_URL },
-  { label: 'FAQs', href: '/faq' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'FAQs', href: '/#faq' },
+  { label: 'Contact', href: '/#contact' },
 ] as const;
 
 export const SERVICES_DATA = [
