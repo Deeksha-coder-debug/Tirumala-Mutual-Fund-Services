@@ -17,8 +17,8 @@ export default function AdminPage() {
 
   // User details
   const user = session?.user || {
-    name: 'Talabaktula Sai Deeksha',
-    email: 'deeksha.jeypore@gmail.com',
+    name: 'Demo Administrator',
+    email: '',
     role: 'ADMIN',
     image: null,
   };

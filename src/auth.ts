@@ -6,7 +6,7 @@ import { Role } from '@prisma/client';
 import { authConfig } from './auth.config';
 
 // List of Admin/Director emails that automatically receive ADMIN privileges
-const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || 'tiru.jeypore@gmail.com,deeksha.jeypore@gmail.com')
+const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || '')
   .split(',')
   .map((e) => e.trim().toLowerCase());
 
@@ -20,7 +20,7 @@ const useDb = !!process.env.DATABASE_URL;
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
-  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || 'tmfs-super-secret-key-32-chars-minimum',
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
   ...(useDb ? { adapter: PrismaAdapter(prisma) } : {}),
   providers: [
     Google({

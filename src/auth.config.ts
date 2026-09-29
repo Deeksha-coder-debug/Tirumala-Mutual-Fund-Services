@@ -6,12 +6,14 @@ export const authConfig = {
     error: '/login',
   },
   session: { strategy: 'jwt' },
-  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || 'tmfs-super-secret-key-32-chars-minimum',
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
   providers: [],
   callbacks: {
     authorized({ auth, request: { nextUrl, cookies } }) {
       const isLoggedIn = !!auth?.user;
-      const isDemo = cookies.get('tmfs_demo_mode')?.value === 'true';
+      const isDemo =
+        process.env.NODE_ENV !== 'production' &&
+        cookies.get('tmfs_demo_mode')?.value === 'true';
       const role = (auth?.user?.role as string | undefined) || (isDemo ? 'ADMIN' : undefined);
       const pathname = nextUrl.pathname;
 

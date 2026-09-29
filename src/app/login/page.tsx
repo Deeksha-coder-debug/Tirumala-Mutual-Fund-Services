@@ -121,13 +121,15 @@ function LoginContent() {
         </button>
 
         {/* Demo Portal Access Button (For instant local preview) */}
-        <button
-          onClick={handleDemoSignIn}
-          className="w-full py-3 px-4 rounded-full bg-slate-800/90 hover:bg-slate-800 text-gold-400 hover:text-gold-300 border border-gold-500/30 text-xs font-bold flex items-center justify-center gap-2 transition-all duration-300 shadow-md cursor-pointer"
-        >
-          <Sparkles className="w-4 h-4 text-gold-400" />
-          <span>Explore Investor Portal (Demo Mode)</span>
-        </button>
+        {process.env.NODE_ENV !== 'production' && (
+          <button
+            onClick={handleDemoSignIn}
+            className="w-full py-3 px-4 rounded-full bg-slate-800/90 hover:bg-slate-800 text-gold-400 hover:text-gold-300 border border-gold-500/30 text-xs font-bold flex items-center justify-center gap-2 transition-all duration-300 shadow-md cursor-pointer"
+          >
+            <Sparkles className="w-4 h-4 text-gold-400" />
+            <span>Explore Investor Portal (Demo Mode)</span>
+          </button>
+        )}
       </div>
 
       {/* Security Badge */}

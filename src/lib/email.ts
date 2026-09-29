@@ -1,6 +1,7 @@
 import { Resend } from 'resend';
 
-export const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder');
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+const notificationEmail = process.env.LEAD_NOTIFICATION_EMAIL;
 
 export async function sendLeadNotificationEmail(leadData: {
   name: string;
@@ -9,15 +10,15 @@ export async function sendLeadNotificationEmail(leadData: {
   service?: string;
   message?: string;
 }) {
-  if (!process.env.RESEND_API_KEY) {
-    console.log('[Resend Mock] Email payload:', leadData);
+  if (!resend || !notificationEmail) {
+    console.warn('[Resend Notice] Email notification is not configured.');
     return { success: true, mock: true };
   }
 
   try {
     const data = await resend.emails.send({
       from: 'TMFS Lead System <onboarding@resend.dev>',
-      to: ['tiru.jeypore@gmail.com'],
+      to: [notificationEmail],
       subject: `New Wealth Consultation Lead: ${leadData.name}`,
       html: `
         <div style="font-family: sans-serif; padding: 20px; color: #1e293b;">
