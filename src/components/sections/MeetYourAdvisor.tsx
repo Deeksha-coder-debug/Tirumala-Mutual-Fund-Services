@@ -103,18 +103,12 @@ export default function MeetYourAdvisor() {
               ))}
             </ul>
 
-            <div className="mt-10 pt-8 border-t border-slate-100 dark:border-slate-800 flex items-center gap-4">
+            <div className="mt-10 pt-8 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-4">
               <div>
                 <h4 className="text-xl font-bold text-slate-900 dark:text-white font-heading">
-                  Tirumala Talabaktula
+                  Sri Tirumala Talabaktula
                 </h4>
-                <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">Founder & Principal Advisor, TMFS</p>
-              </div>
-              <div className="ml-auto hidden sm:block">
-                 {/* Signature */}
-                 <div className="font-script text-3xl text-slate-400 dark:text-slate-600 opacity-60">
-                    T. Talabaktula
-                 </div>
+                <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">Founder & Principal Wealth Advisor, TMFS</p>
               </div>
             </div>
           </motion.div>

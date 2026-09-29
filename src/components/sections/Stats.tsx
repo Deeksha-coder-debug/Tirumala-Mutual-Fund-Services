@@ -139,11 +139,11 @@ export default function Stats() {
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
                 <CheckCircle2 size={16} className="text-gold-500" />
-                <span className="text-xs md:text-sm text-slate-800 dark:text-slate-200 font-bold">15+ Years Exp.</span>
+                <span className="text-xs md:text-sm text-slate-800 dark:text-slate-200 font-bold">AMFI Registered (ARN-144270)</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 size={16} className="text-gold-500" />
-                <span className="text-xs md:text-sm text-slate-800 dark:text-slate-200 font-bold">300+ Families Served</span>
+                <span className="text-xs md:text-sm text-slate-800 dark:text-slate-200 font-bold">100% Transparent Advice</span>
               </div>
             </div>
             

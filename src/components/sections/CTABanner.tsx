@@ -38,9 +38,9 @@ export default function CTABanner() {
           </div>
 
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 font-heading leading-tight">
-            Start Your Wealth{' '}
+            Ready to Structure{' '}
             <span className="bg-gradient-to-r from-gold-300 to-gold-500 bg-clip-text text-transparent">
-              Journey Today
+              Your Financial Future?
             </span>
           </h2>
 

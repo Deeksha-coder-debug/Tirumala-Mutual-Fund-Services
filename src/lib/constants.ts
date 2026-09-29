@@ -70,7 +70,7 @@ export const STATS: Array<{ value: number; suffix?: string; prefix?: string; lab
 
 export const NAVIGATION = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
+  { label: 'Advisor', href: '/knowyouradvisor' },
   {
     label: 'Services',
     href: '/services',

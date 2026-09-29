@@ -3,8 +3,21 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, BadgeCheck, MapPin, ShieldCheck, TrendingUp, UserRound } from 'lucide-react';
+import { ArrowRight, BadgeCheck, MapPin, ShieldCheck, TrendingUp, UserRound, Lock } from 'lucide-react';
 import { BUSINESS_INFO, SITE_CONFIG } from '@/lib/constants';
+
+const EMPANELED_AMCS = [
+  'ICICI Prudential Mutual Fund',
+  'HDFC Mutual Fund',
+  'SBI Mutual Fund',
+  'Tata Mutual Fund',
+  'Nippon India Mutual Fund',
+  'Kotak Mahindra Mutual Fund',
+  'Aditya Birla Sun Life Mutual Fund',
+  'Axis Mutual Fund',
+  'Mirae Asset Mutual Fund',
+  'Bandhan Mutual Fund'
+];
 
 export default function InstitutionalHome() {
   // SIP Calculator State
@@ -134,7 +147,7 @@ export default function InstitutionalHome() {
                 <p className="text-[13px] text-slate-400 mt-1">Serving Koraput district &amp; nationwide clients</p>
               </div>
               <div className="border-l border-white/10 px-2 text-center md:px-4">
-                <span className="font-body tabular-nums text-[28px] md:text-[34px] text-white block font-semibold">₹120+ Cr</span>
+                <span className="font-body tabular-nums text-[28px] md:text-[34px] text-white block font-semibold">₹10+ Cr</span>
                 <span className="text-[14px] text-white mt-1 block font-medium">Assets Monitored</span>
                 <p className="text-[13px] text-slate-400 mt-1">Disciplined retail &amp; HNI portfolios</p>
               </div>
@@ -622,6 +635,57 @@ export default function InstitutionalHome() {
                 <h4 className="text-[16px] !text-slate-950 font-bold">B. N. Tripathy, OAS (Retd.)</h4>
                 <p className="text-[13px] text-slate-500">Former Administrator • Rayagada / Bhubaneswar</p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 8. EMPANELED MUTUAL FUND HOUSES (Institutional Network)                   */}
+      {/* ========================================================================= */}
+      <section className="border-t border-slate-200 bg-white py-16 dark:border-slate-800 dark:bg-[#070f1f] sm:py-20">
+        <div className="mx-auto max-w-[1240px] px-5 sm:px-6 lg:px-12 text-center">
+          <span className="inline-flex items-center gap-2 text-[11px] text-gold-700 dark:text-gold-400 uppercase tracking-[0.18em] font-bold mb-2">
+            <span className="h-px w-6 bg-gold-600" />
+            Institutional Network
+            <span className="h-px w-6 bg-gold-600" />
+          </span>
+          <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#061426] dark:text-white mb-4">
+            Empaneled With India&apos;s Leading Mutual Fund Houses
+          </h2>
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-10 font-normal">
+            We provide seamless access to top-tier fund managers across active equity, index, hybrid, and liquid categories.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
+            {EMPANELED_AMCS.map((amc, i) => (
+              <span
+                key={i}
+                className="px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 shadow-xs hover:border-gold-500/50 hover:shadow-sm transition-all"
+              >
+                {amc}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 9. REGULATORY RIGOR & STATUTORY COMPLIANCE DISCLOSURE                     */}
+      {/* ========================================================================= */}
+      <section className="border-t border-slate-200 bg-slate-100/80 py-12 dark:border-slate-800 dark:bg-slate-900/60">
+        <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs dark:border-slate-800 dark:bg-slate-900 flex flex-col md:flex-row items-center gap-5">
+            <div className="w-12 h-12 rounded-xl bg-primary-50 dark:bg-primary-900/30 flex items-center justify-center text-primary-700 dark:text-gold-400 shrink-0">
+              <Lock size={24} />
+            </div>
+            <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed flex-1">
+              <p className="font-bold text-[#061426] dark:text-white mb-1">
+                Statutory Compliance &amp; Risk Disclosure
+              </p>
+              <p>
+                Tirumala Mutual Fund Services is an AMFI Registered Mutual Fund Distributor with ARN-144270. Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not an indicator of future returns.
+              </p>
             </div>
           </div>
         </div>
