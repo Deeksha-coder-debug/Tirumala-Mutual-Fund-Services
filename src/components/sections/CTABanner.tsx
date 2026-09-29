@@ -8,7 +8,7 @@ export default function CTABanner() {
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
 
   return (
-    <section ref={ref} className="relative overflow-hidden py-16 sm:py-20 lg:py-24" aria-label="Call to action">
+    <section ref={ref} className="relative overflow-hidden pt-8 pb-4 sm:pt-8 sm:pb-6 lg:pt-12 lg:pb-8" aria-label="Call to action">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-950" />
       

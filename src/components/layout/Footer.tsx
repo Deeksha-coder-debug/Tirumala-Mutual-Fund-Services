@@ -7,7 +7,7 @@ import {
   Phone, Mail, MapPin, Clock, Facebook, Instagram,
   ArrowRight, Heart, ExternalLink,
 } from 'lucide-react';
-import { SITE_CONFIG, CONTACT_INFO, SOCIAL_LINKS, BUSINESS_INFO, DISCLAIMER_TEXT } from '@/lib/constants';
+import { SITE_CONFIG, CONTACT_INFO, OFFICE_MAP_URL, SOCIAL_LINKS, BUSINESS_INFO, DISCLAIMER_TEXT } from '@/lib/constants';
 
 const quickLinks = [
   { label: 'About Us', href: '/about' },
@@ -85,13 +85,24 @@ export default function Footer() {
                 <Mail size={20} className="text-gold-400 mt-[2px] shrink-0" />
                 <span className="text-gray-200">{CONTACT_INFO.email}</span>
               </a>
-              <div className="flex items-start gap-3 text-sm">
+              <a
+                href={OFFICE_MAP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit our office in Jeypore on Google Maps"
+                className="group flex items-start gap-3 text-sm transition-colors hover:text-gold-400"
+              >
                 <MapPin size={20} className="text-gold-400 mt-[2px] shrink-0" />
                 <div>
-                  <p className="text-gray-200">{CONTACT_INFO.address.full.split(' (')[0]}</p>
-                  <p className="text-gray-400 text-xs">({CONTACT_INFO.address.coordinates})</p>
+                  <p className="text-gray-200">
+                    {CONTACT_INFO.address.line1}, {CONTACT_INFO.address.line2}, {CONTACT_INFO.address.city}, {CONTACT_INFO.address.state} {CONTACT_INFO.address.pin}
+                  </p>
+                  <span className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-gold-400 group-hover:text-gold-300">
+                    Visit Our Office
+                    <ExternalLink size={12} aria-hidden="true" />
+                  </span>
                 </div>
-              </div>
+              </a>
               <div className="flex items-start gap-3 text-sm">
                 <Clock size={20} className="text-gold-400 mt-[2px] shrink-0" />
                 <div>

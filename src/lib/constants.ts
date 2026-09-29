@@ -49,6 +49,10 @@ export const CONTACT_INFO = {
   },
 } as const;
 
+export const OFFICE_MAP_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+  `${CONTACT_INFO.address.line1}, ${CONTACT_INFO.address.line2}, ${CONTACT_INFO.address.city}, ${CONTACT_INFO.address.state} ${CONTACT_INFO.address.pin}`
+)}`;
+
 export const SOCIAL_LINKS = {
   facebook: 'https://www.facebook.com/tirumala.mutual.funds',
   instagram: 'https://www.instagram.com/tirumala.mutual.funds',
@@ -106,7 +110,7 @@ export const NAVIGATION = [
   },
   { label: 'News & NFOs', href: '/news' },
   { label: 'Gallery', href: '/gallery' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'Visit Our Office', href: OFFICE_MAP_URL },
   { label: 'FAQs', href: '/faq' },
   { label: 'Contact', href: '/contact' },
 ] as const;

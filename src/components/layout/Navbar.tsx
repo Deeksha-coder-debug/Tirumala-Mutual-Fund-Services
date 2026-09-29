@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSession, signOut } from 'next-auth/react';
 import {
-  Menu, X, ChevronDown, ChevronRight, Phone, Sun, Moon, ArrowUpRight,
+  Menu, X, ChevronDown, ChevronRight, MapPin, Phone, Sun, Moon, ArrowUpRight,
   MessageCircle, User as UserIcon, LogOut, LayoutDashboard, Shield, LogIn
 } from 'lucide-react';
 import { NAVIGATION, SITE_CONFIG, CONTACT_INFO } from '@/lib/constants';
@@ -41,7 +41,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed inset-x-0 top-0 z-50 h-[72px] md:h-20 transition-colors duration-300 ${
+        className={`fixed inset-x-0 top-0 z-50 h-[68px] md:h-[76px] transition-colors duration-300 ${
           isScrolled
             ? 'bg-primary-950/95 backdrop-blur-xl shadow-xl shadow-black/30 border-b border-primary-800/80'
             : 'bg-primary-950/90 backdrop-blur-lg border-b border-white/10'
@@ -49,7 +49,7 @@ export default function Navbar() {
         role="navigation"
         aria-label="Main navigation"
       >
-        <div className="container-custom !max-w-none !px-2 sm:!px-3 lg:!px-4 flex h-full items-center justify-between">
+        <div className="flex h-full w-full max-w-none items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group" aria-label="Tirumala Mutual Fund Services - Home">
             <div className="relative w-11 h-11 md:w-13 md:h-13 rounded-full overflow-hidden ring-2 ring-gold-400/55 group-hover:ring-gold-400 transition-all duration-300 bg-white p-0.5 shadow-md shadow-gold-500/10 group-hover:shadow-gold-400/30">
@@ -84,12 +84,15 @@ export default function Navbar() {
               >
                 <Link
                   href={item.href}
+                  target={item.href.startsWith('https://') ? '_blank' : undefined}
+                  rel={item.href.startsWith('https://') ? 'noopener noreferrer' : undefined}
                   className={`py-2 px-3 -mx-3 rounded-lg text-[15px] font-semibold transition-all duration-300 flex items-center gap-1.5 ${
                     activeDropdown === item.label
                       ? 'bg-gold-500/15 text-gold-300 ring-1 ring-inset ring-gold-400/30 shadow-lg shadow-black/20'
                       : 'text-gold-400 hover:text-gold-300 hover:bg-gold-500/10'
                   }`}
                 >
+                  {item.label === 'Visit Our Office' && <MapPin size={14} aria-hidden="true" />}
                   {item.label}
                   {'children' in item && <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === item.label ? 'rotate-180 text-teal-600' : 'text-gold-400'}`} />}
                 </Link>
@@ -268,7 +271,7 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-      <div aria-hidden="true" className="h-[72px] md:h-20" />
+      <div aria-hidden="true" className="h-[68px] md:h-[76px]" />
 
       {/* Dim the page while a desktop dropdown is open so the menu remains the visual focus. */}
       <AnimatePresence>
@@ -418,9 +421,12 @@ export default function Navbar() {
                     ) : (
                       <Link
                         href={item.href}
+                        target={item.href.startsWith('https://') ? '_blank' : undefined}
+                        rel={item.href.startsWith('https://') ? 'noopener noreferrer' : undefined}
                         onClick={toggleMobile}
-                        className="block px-4 py-3 text-gold-600 dark:text-gold-400 hover:bg-gold-500/10 hover:text-gold-300 rounded-xl font-semibold transition-colors text-sm"
+                        className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-gold-600 transition-colors hover:bg-gold-500/10 hover:text-gold-300 dark:text-gold-400"
                       >
+                        {item.label === 'Visit Our Office' && <MapPin size={16} aria-hidden="true" />}
                         {item.label}
                       </Link>
                     )}

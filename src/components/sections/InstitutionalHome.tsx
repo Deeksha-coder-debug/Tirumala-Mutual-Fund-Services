@@ -33,36 +33,29 @@ export default function InstitutionalHome() {
       {/* ========================================================================= */}
       {/* 1. HERO SECTION (Midnight Institutional Atmosphere)                       */}
       {/* ========================================================================= */}
-      <section className="relative bg-primary-950 text-white overflow-hidden border-b border-white/10 pt-8 pb-16 md:pt-12 md:pb-18">
-        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-blue-600/10 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-10 w-80 h-80 rounded-full bg-amber-400/5 blur-3xl pointer-events-none" />
+      <section className="relative overflow-hidden border-b border-white/10 bg-primary-950 pt-8 pb-12 text-white md:pt-10 md:pb-14">
+        <div className="mx-auto max-w-[1240px] px-5 sm:px-6 lg:px-12">
+          <div className="grid grid-cols-1 items-center gap-8 xl:grid-cols-[minmax(0,1.25fr)_minmax(22rem,0.8fr)] xl:gap-16">
+            <div className="flex flex-col items-start">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-gold-400/25 bg-white/5 px-3.5 py-2">
+                <span className="material-symbols-outlined text-[16px] text-gold-400">verified</span>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-300 sm:text-[11px]">
+                  AMFI-Registered Mutual Fund Distributor • {BUSINESS_INFO.arn}
+                </span>
+              </div>
 
-        <div className="relative max-w-[1440px] mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 gap-10 xl:grid-cols-[15fr_38fr_3fr_29fr_15fr] xl:grid-rows-[auto_1fr] xl:gap-0 items-start">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6 xl:col-start-2 xl:row-start-1 xl:mb-5 xl:w-full">
-              <span className="material-symbols-outlined text-gold-500 text-[16px]">verified</span>
-              <span className="text-[11px] tracking-widest uppercase text-slate-300 font-medium">
-                AMFI-REGISTERED MUTUAL FUND DISTRIBUTOR • {BUSINESS_INFO.arn}
-              </span>
-            </div>
-
-            {/* Left Content Column */}
-            <div className="flex flex-col items-start xl:col-start-2 xl:row-start-2">
-              <h1
-                className="w-full text-left !font-light text-[2.5rem] leading-[1.04] tracking-[-0.04em] text-white mb-5 md:text-[3.4rem] lg:text-[4.1rem] xl:text-[4.35rem]"
-              >
+              <h1 className="mb-5 w-full text-left text-[2.35rem] font-light leading-[1.08] tracking-[-0.03em] text-white sm:text-5xl xl:text-[3.9rem]">
                 Nurturing Wealth Across Generations with{' '}
-                <span className="block font-serif italic text-gold-500">Disciplined Wisdom.</span>
+                <span className="block font-serif italic text-gold-400">Disciplined Wisdom.</span>
               </h1>
-              <p className="text-[15px] md:text-[17px] text-slate-300 max-w-xl md:max-w-2xl mb-8 md:mb-10 leading-[1.7]">
+              <p className="mb-7 max-w-2xl text-[15px] leading-7 text-slate-300 sm:text-base">
                 For over 15 years, Tirumala Mutual Fund Services has guided families, physicians, and enterprise leaders across Odisha and Pan-India toward enduring financial independence through bespoke mutual fund strategies and disciplined investing.
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 mt-1 mb-0 md:mb-2">
+              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center px-7 py-3.5 bg-gold-500 text-primary-950 text-[15px] font-semibold rounded-lg hover:bg-gold-600 transition-all shadow-md min-h-[52px] min-w-[220px]"
+                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-gold-500 px-6 py-3 text-center text-sm font-bold text-primary-950 shadow-md transition-colors hover:bg-gold-400 sm:w-auto sm:text-[15px]"
                 >
                   <span>Schedule a Wealth Consultation</span>
                   <span className="material-symbols-outlined ml-2 text-[18px]">arrow_forward</span>
@@ -70,7 +63,7 @@ export default function InstitutionalHome() {
 
                 <a
                   href="#sip-calculator"
-                  className="inline-flex items-center justify-center px-7 py-3.5 bg-transparent border border-white/20 text-white text-[15px] font-medium rounded-lg hover:bg-white/5 transition-all min-h-[52px] min-w-[200px]"
+                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg border border-white/25 px-6 py-3 text-center text-sm font-semibold text-white transition-colors hover:border-gold-400/70 hover:bg-white/5 sm:w-auto sm:text-[15px]"
                 >
                   <span className="material-symbols-outlined mr-2 text-[18px] text-gold-500">calculate</span>
                   <span>Simulate SIP Growth</span>
@@ -79,12 +72,11 @@ export default function InstitutionalHome() {
             </div>
 
             {/* Right Desk Card */}
-            <div className="xl:col-start-4 xl:row-start-2 xl:self-stretch" style={{ margin: '12px' }}>
+            <div className="xl:justify-self-end">
               <div
-                className="flex h-full w-full max-w-md flex-col justify-between rounded-2xl bg-primary-950/80 border border-white/10 backdrop-blur-md shadow-xl text-left"
-                style={{ padding: '24px' }}
+                className="w-full max-w-md rounded-2xl border border-gold-400/25 bg-white p-6 text-left text-primary-950 shadow-[0_18px_45px_-28px_rgba(0,0,0,0.7)] sm:p-7"
               >
-                <div className="flex items-center justify-between gap-3 border-b border-white/10" style={{ paddingBottom: '16px' }}>
+                <div className="flex items-center justify-between gap-3 border-b border-slate-200 pb-4">
                   <div className="flex min-w-0 items-center gap-3">
                     <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gold-400/60 bg-white p-0.5">
                       <Image
@@ -96,35 +88,37 @@ export default function InstitutionalHome() {
                       />
                     </div>
                     <div className="min-w-0">
-                      <span className="text-[10px] text-gold-400/90 tracking-wider uppercase font-semibold block">
+                      <span className="block text-[10px] font-bold uppercase tracking-wider text-gold-700">
                         Senior Wealth Stewardship
                       </span>
-                      <h3 className="font-sans whitespace-nowrap text-[15px] font-bold text-white leading-snug">Sri Tirumala Talabaktula</h3>
-                      <p className="text-xs text-slate-400">
+                      <h3 className="whitespace-nowrap font-sans text-[15px] font-bold leading-snug !text-primary-950">Sri Tirumala Talabaktula</h3>
+                      <p className="text-xs text-slate-600">
                         Principal Wealth Strategist<br />
                         Jeypore, Odisha
                       </p>
                     </div>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gold-400 shrink-0">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold-200 bg-gold-50 text-gold-700">
                     <BadgeCheck className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
                   </div>
                 </div>
 
-                <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-gold-400 font-semibold">Wealth Philosophy</p>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-200">
-                    Portfolio design built around your life stage, cash-flow needs, and long-term ambitions.
+                <div className="mt-5 rounded-xl border border-gold-200/70 bg-[#f6f3ea] p-4">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-gold-700">Wealth Philosophy</p>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-700">
+                    &ldquo;Let your money grow alongside your dreams, and pave the way to a golden future.
+                    <br />
+                    Start small, invest thoughtfully, and take a confident step toward the future you envision.&rdquo;
                   </p>
                 </div>
 
-                <div className="mt-5 grid gap-3 text-sm text-slate-200">
+                <div className="mt-5 grid gap-3 text-sm text-slate-700">
                   <div className="flex items-start gap-2">
-                    <span className="mt-1.5 h-2 w-2 rounded-full bg-gold-400 shrink-0" />
+                    <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-gold-500" />
                     <span>Tailored strategy and disciplined portfolio stewardship.</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <span className="mt-1.5 h-2 w-2 rounded-full bg-gold-400 shrink-0" />
+                    <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-gold-500" />
                     <span>Transparent execution with risk-aware, goal-based planning.</span>
                   </div>
                 </div>
@@ -132,25 +126,24 @@ export default function InstitutionalHome() {
             </div>
             {/* Stats Bar */}
             <div
-              className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 border-t border-white/10 xl:col-start-2 xl:col-span-3 xl:justify-self-start xl:w-[calc(100%_-_12px)]"
-              style={{ marginTop: '48px', paddingTop: '28px' }}
+              className="mt-2 grid grid-cols-2 gap-x-3 gap-y-6 border-t border-white/15 pt-6 md:grid-cols-4 md:gap-6 md:pt-7 xl:col-span-2"
             >
-              <div className="px-2 md:px-4 text-center md:text-left">
+              <div className="px-2 text-center md:px-4">
                 <span className="font-body tabular-nums text-[28px] md:text-[34px] text-gold-500 block font-semibold">15+</span>
                 <span className="text-[14px] text-white mt-1 block font-medium">Advisory Heritage</span>
                 <p className="text-[13px] text-slate-400 mt-1">Serving Koraput district &amp; nationwide clients</p>
               </div>
-              <div className="border-l border-white/10 px-2 md:px-4 text-center md:text-left">
+              <div className="border-l border-white/10 px-2 text-center md:px-4">
                 <span className="font-body tabular-nums text-[28px] md:text-[34px] text-white block font-semibold">₹120+ Cr</span>
                 <span className="text-[14px] text-white mt-1 block font-medium">Assets Monitored</span>
                 <p className="text-[13px] text-slate-400 mt-1">Disciplined retail &amp; HNI portfolios</p>
               </div>
-              <div className="border-l border-white/10 px-2 md:px-4 text-center md:text-left">
+              <div className="border-l-0 px-2 text-center md:border-l md:border-white/10 md:px-4">
                 <span className="font-body tabular-nums text-[28px] md:text-[34px] text-gold-400 block font-semibold">{BUSINESS_INFO.arn}</span>
                 <span className="text-[14px] text-white mt-1 block font-medium">AMFI Registered</span>
                 <p className="text-[13px] text-slate-400 mt-1">Statutory compliance and SEBI oversight</p>
               </div>
-              <div className="border-l border-white/10 px-2 md:px-4 text-center md:text-left">
+              <div className="border-l border-white/10 px-2 text-center md:px-4">
                 <span className="font-body tabular-nums text-[28px] md:text-[34px] text-white block font-semibold">100%</span>
                 <span className="text-[14px] text-white mt-1 block font-medium">Transparent Advice</span>
                 <p className="text-[13px] text-slate-400 mt-1">Unbiased guidance and no hidden conflicts</p>
@@ -165,21 +158,18 @@ export default function InstitutionalHome() {
       {/* ========================================================================= */}
       <section id="philosophy" className="bg-[#f6f3ea] text-primary-950 border-b border-primary-900/10">
         <div className="mx-auto max-w-[1240px] px-5 py-16 sm:px-6 sm:py-20 lg:px-12 lg:py-24">
-          <div className="mb-5">
+          <div className="mb-5 text-center">
             <span className="inline-flex items-center gap-2 text-[11px] text-gold-700 uppercase tracking-[0.18em] font-bold">
               <span className="h-px w-7 bg-gold-600" />
               TMFS Philosophy
             </span>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-end lg:gap-16 mb-12 lg:mb-16">
-            <div className="px-3 py-2 sm:px-6 sm:py-4">
-              <h2 className="font-serif text-[2rem] leading-[1.15] !text-gold-800 sm:text-4xl lg:text-[2.8rem]">
-                Wealth Advisory Grounded in <br className="hidden sm:block" />
-                <span className="italic">Integrity</span> and Local Closeness.
-              </h2>
-            </div>
-            <p className="rounded-xl border border-gold-200/70 border-l-2 border-l-gold-500 bg-white/60 px-6 py-6 text-[15px] leading-7 text-slate-700 sm:px-8 sm:py-8 sm:text-base lg:mb-1">
+          <div className="mx-auto mb-10 max-w-3xl px-3 py-2 text-center sm:mb-14 sm:px-6 sm:py-4 lg:mb-16">
+            <h2 className="font-serif text-[2rem] leading-[1.15] !text-gold-800 sm:text-4xl lg:text-[2.8rem]">
+              Wealth Advisory Grounded in Integrity and Local Closeness.
+            </h2>
+            <p className="mx-auto mt-5 max-w-3xl rounded-xl border border-gold-200/70 border-l-2 border-l-gold-500 bg-white/60 px-6 py-6 text-[15px] leading-7 text-slate-700 sm:px-8 sm:py-8 sm:text-base">
               While algorithmic platforms reduce families to demographic data, Tirumala Mutual Fund Services combines institutional portfolio design with the warmth, patience, and confidentiality of your local Jeypore wealth counselor.
             </p>
           </div>
@@ -379,19 +369,21 @@ export default function InstitutionalHome() {
       {/* ========================================================================= */}
       <section className="bg-primary-950 py-16 text-white sm:py-20 lg:py-24" id="sip-calculator">
         <div className="mx-auto max-w-[1240px] px-5 sm:px-6 lg:px-12">
+          <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
+            <div className="mx-auto mb-4 inline-flex w-fit items-center gap-2 rounded-lg bg-white/10 px-3 py-1 text-gold-400">
+              <span className="text-[11px] font-bold uppercase tracking-wider">Compound Interest Simulator</span>
+            </div>
+            <h2 className="font-serif text-3xl leading-tight text-white sm:text-4xl">
+              Experience the Power of Disciplined Compounding
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-300 sm:text-[15px]">
+              Consistent monthly SIPs eliminate market timing anxiety and unlock exponential compounding over 10 to 20-year horizons.
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-14">
             {/* Controls */}
             <div className="flex max-w-2xl flex-col">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-white/10 text-gold-500 w-fit mb-4">
-                <span className="text-[11px] uppercase tracking-wider font-bold">Compound Interest Simulator</span>
-              </div>
-              <h2 className="mb-3 font-serif text-3xl leading-tight text-white sm:text-4xl">
-                Experience the Power of Disciplined Compounding
-              </h2>
-              <p className="mb-7 text-sm leading-7 text-slate-300 sm:mb-8 sm:text-[15px]">
-                Consistent monthly SIPs eliminate market timing anxiety and unlock exponential compounding over 10 to 20-year horizons.
-              </p>
-
               <div className="space-y-6 rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-7 lg:p-8">
                 {/* Investment */}
                 <div>
@@ -582,14 +574,12 @@ export default function InstitutionalHome() {
       {/* ========================================================================= */}
       <section className="border-b border-slate-200 bg-white py-16 text-slate-900 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-[1240px] px-5 sm:px-6 lg:px-12">
-          <div className="mb-10 flex flex-col justify-between gap-5 border-b border-slate-200 pb-7 sm:mb-14 sm:pb-8 md:flex-row md:items-end lg:mb-16">
-            <div>
-              <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.18em] text-gold-700">Client Stewardship</span>
-              <h2 className="font-serif text-3xl leading-tight !text-slate-950 sm:text-4xl lg:text-[40px]">
-                Trusted by Families Across Odisha
-              </h2>
-            </div>
-            <p className="max-w-md text-[15px] leading-7 text-slate-600 sm:text-base">
+          <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-14 lg:mb-16">
+            <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.18em] text-gold-700">Client Stewardship</span>
+            <h2 className="font-serif text-3xl leading-tight !text-slate-950 sm:text-4xl lg:text-[40px]">
+              Trusted by Families Across Odisha
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-7 text-slate-600 sm:text-base">
               Reflections from entrepreneurs, senior clinicians, and executives who have partnered with TMFS for over a decade.
             </p>
           </div>

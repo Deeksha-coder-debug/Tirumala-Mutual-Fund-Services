@@ -52,7 +52,7 @@ export default function LeadForm() {
   return (
     <section
       ref={ref}
-      className="section-padding bg-slate-50 dark:bg-slate-950 transition-colors"
+      className="section-padding !pt-6 !pb-16 sm:!pt-8 sm:!pb-20 lg:!pt-8 lg:!pb-24 bg-slate-50 dark:bg-slate-950 transition-colors"
       id="enquiry"
       aria-label="Enquiry form"
     >
@@ -169,26 +169,26 @@ export default function LeadForm() {
           </form>
 
           {/* Consultation actions moved from the banner to follow the form. */}
-          <div className="mx-auto mt-6 flex w-full max-w-3xl flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:gap-4">
+          <div className="mx-auto mt-6 grid w-full max-w-2xl grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Link
               href="/contact"
-              className="group flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-gold-500 px-6 py-3.5 text-center text-sm font-extrabold text-primary-950 shadow-lg shadow-gold-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-400 sm:w-auto sm:flex-1 sm:text-base"
+              className="group col-span-full flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-gold-500 px-6 py-3.5 text-center text-sm font-extrabold text-primary-950 shadow-lg shadow-gold-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-400 sm:text-base"
             >
               Book Free Consultation
               <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
             </Link>
             <a
               href={`tel:${CONTACT_INFO.mobile}`}
-              className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-primary-800/20 bg-primary-950 px-6 py-3.5 text-center text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-900 sm:w-auto sm:flex-1 sm:text-base"
+              className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-gold-300 bg-white px-6 py-3.5 text-center text-sm font-bold !text-primary-950 transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-50 hover:!text-primary-950 sm:text-base"
             >
-              <Phone size={16} />
-              Call Now
+              <Phone size={16} className="text-gold-700" />
+              <span style={{ color: '#061426' }}>Call Now</span>
             </a>
             <a
               href={CONTACT_INFO.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-green-700 px-6 py-3.5 text-center text-sm font-bold text-white shadow-lg shadow-green-950/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-green-600 sm:w-auto sm:flex-1 sm:text-base"
+              className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-green-700 px-6 py-3.5 text-center text-sm font-bold text-white shadow-lg shadow-green-950/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-green-600 sm:text-base"
             >
               <MessageCircle size={18} />
               WhatsApp Us
