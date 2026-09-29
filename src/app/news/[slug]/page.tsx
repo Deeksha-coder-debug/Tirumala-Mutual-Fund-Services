@@ -1,13 +1,14 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Clock, User, Tag, Download, Share2, TrendingUp, AlertTriangle, FileText } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, User, Tag, Download, TrendingUp, AlertTriangle, FileText } from 'lucide-react';
 import { getNewsItems } from '@/lib/cms-storage';
 import { NfoCard, IpoCard, NewsCard } from '@/components/news/NewsCards';
 import PublicSiteShell from '@/components/layout/PublicSiteShell';
 import { getYoutubeEmbedUrl } from '@/lib/youtube';
 import { formatDisplayDate } from '@/lib/date-utils';
 import { Play } from 'lucide-react';
+import ShareArticleButton from '@/components/news/ShareArticleButton';
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
@@ -70,19 +71,39 @@ export default async function NewsItemPage({ params }: NewsItemPageProps) {
       />
       <main id="main-content" className="pt-8 pb-16 min-h-screen bg-slate-50 dark:bg-dark-1">
         <div className="container-custom max-w-4xl">
-          {/* Breadcrumbs */}
-          <nav className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-8 overflow-x-auto whitespace-nowrap">
-            <Link href="/" className="hover:text-primary-600 dark:hover:text-gold-400 transition-colors">Home</Link>
-            <span>/</span>
-            <Link href="/news" className="hover:text-primary-600 dark:hover:text-gold-400 transition-colors">News & NFOs</Link>
-            <span>/</span>
-            <span className="text-gray-900 dark:text-gray-200 font-medium truncate">{item.title}</span>
-          </nav>
+          {/* Breadcrumbs & Navigation */}
+          <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <nav 
+              aria-label="Breadcrumb" 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-50/90 dark:bg-slate-900 border border-blue-200/80 dark:border-blue-900/60 text-sm font-bold overflow-x-auto whitespace-nowrap shadow-xs"
+            >
+              <Link 
+                href="/" 
+                className="text-[#0B1E3D] dark:text-blue-300 hover:text-blue-700 dark:hover:text-gold-400 font-extrabold transition-colors hover:underline"
+              >
+                Home
+              </Link>
+              <span className="text-[#0B1E3D]/50 dark:text-blue-400/50 font-black">/</span>
+              <Link 
+                href="/news" 
+                className="text-[#0B1E3D] dark:text-blue-300 hover:text-blue-700 dark:hover:text-gold-400 font-extrabold transition-colors hover:underline"
+              >
+                News & NFOs
+              </Link>
+              <span className="text-[#0B1E3D]/50 dark:text-blue-400/50 font-black">/</span>
+              <span className="text-[#0B1E3D] dark:text-white font-black truncate max-w-xs sm:max-w-md md:max-w-xl">
+                {item.title}
+              </span>
+            </nav>
 
-          <Link href="/news" className="inline-flex items-center gap-2 text-primary-700 dark:text-gold-400 font-medium hover:underline mb-8">
-            <ArrowLeft size={16} />
-            Back to News
-          </Link>
+            <Link 
+              href="/news" 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1E3D] hover:bg-[#071526] text-white font-extrabold text-sm shadow-md transition-all border border-[#0B1E3D] dark:border-blue-500/40 group hover:scale-[1.02] active:scale-95 shrink-0"
+            >
+              <ArrowLeft size={16} className="text-gold-400 group-hover:-translate-x-1 transition-transform stroke-[2.8]" />
+              <span>Back to News</span>
+            </Link>
+          </div>
 
           <article className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
             <div className="p-8 md:p-12">
@@ -91,10 +112,7 @@ export default async function NewsItemPage({ params }: NewsItemPageProps) {
                 <span className="bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-gold-400 px-3 py-1 rounded-full text-sm font-semibold tracking-wide uppercase">
                   {item.category}
                 </span>
-                <button className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-gold-400 transition-colors">
-                  <Share2 size={16} />
-                  Share Article
-                </button>
+                <ShareArticleButton title={item.title} excerpt={item.excerpt} />
               </div>
 
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 font-heading leading-tight">

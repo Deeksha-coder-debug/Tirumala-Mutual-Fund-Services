@@ -63,7 +63,8 @@ export async function POST(request: NextRequest) {
       }
 
       saveNewsItems(updated);
-      return NextResponse.json({ success: true, items: updated });
+      const sortedResult = getNewsItems();
+      return NextResponse.json({ success: true, items: sortedResult });
     }
 
     if (type === 'gallery') {

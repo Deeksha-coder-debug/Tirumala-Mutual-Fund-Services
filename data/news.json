@@ -111,6 +111,24 @@
     ]
   },
   {
+    "id": "n5",
+    "slug": "sebi-new-guidelines-multicap",
+    "title": "SEBI Modifies Asset Allocation Rules for Multi-Cap Funds",
+    "category": "SEBI Circulars",
+    "status": "published",
+    "publishDate": "2026-05-18T08:00:00Z",
+    "author": "TMFS Compliance",
+    "readingTime": 2,
+    "excerpt": "SEBI has updated the minimum allocation limits across Large, Mid, and Small cap stocks for Multi-Cap mutual funds.",
+    "content": "<p>To ensure true-to-label categorization, SEBI has mandated that all multi-cap funds must maintain a minimum of 25% allocation each in Large-cap, Mid-cap, and Small-cap stocks at all times.</p>",
+    "tags": [
+      "SEBI",
+      "Compliance",
+      "Multi-Cap"
+    ],
+    "featured": false
+  },
+  {
     "id": "n3",
     "slug": "understanding-new-capital-gains-tax",
     "title": "Understanding the New Capital Gains Tax Rules 2026",
@@ -145,24 +163,6 @@
       "Compounding",
       "Beginners",
       "Wealth Creation"
-    ],
-    "featured": false
-  },
-  {
-    "id": "n5",
-    "slug": "sebi-new-guidelines-multicap",
-    "title": "SEBI Modifies Asset Allocation Rules for Multi-Cap Funds",
-    "category": "SEBI Circulars",
-    "status": "published",
-    "publishDate": "2026-05-18T08:00:00Z",
-    "author": "TMFS Compliance",
-    "readingTime": 2,
-    "excerpt": "SEBI has updated the minimum allocation limits across Large, Mid, and Small cap stocks for Multi-Cap mutual funds.",
-    "content": "<p>To ensure true-to-label categorization, SEBI has mandated that all multi-cap funds must maintain a minimum of 25% allocation each in Large-cap, Mid-cap, and Small-cap stocks at all times.</p>",
-    "tags": [
-      "SEBI",
-      "Compliance",
-      "Multi-Cap"
     ],
     "featured": false
   }

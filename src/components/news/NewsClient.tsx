@@ -17,13 +17,19 @@ export default function NewsClient({ items }: NewsClientProps) {
   const [filter, setFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredItems = items.filter(item => {
-    const matchesCategory = filter === 'All' || item.category === filter;
-    const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          item.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
+  const filteredItems = items
+    .filter(item => {
+      const matchesCategory = filter === 'All' || item.category === filter;
+      const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                            item.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+      return matchesCategory && matchesSearch;
+    })
+    .sort((a, b) => {
+      const timeA = a.publishDate ? new Date(a.publishDate).getTime() : 0;
+      const timeB = b.publishDate ? new Date(b.publishDate).getTime() : 0;
+      return timeB - timeA;
+    });
 
   return (
     <div className="w-full">

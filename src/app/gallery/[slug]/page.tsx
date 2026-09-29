@@ -25,9 +25,11 @@ export async function generateMetadata({ params }: GalleryItemPageProps): Promis
   return {
     title: `${item.title} | TMFS Gallery`,
     description: item.description || `View ${item.title} in our gallery.`,
-    openGraph: {
-      images: [{ url: item.imageUrl }],
-    }
+    ...(item.imageUrl ? {
+      openGraph: {
+        images: [{ url: item.imageUrl }],
+      }
+    } : {})
   };
 }
 
@@ -89,7 +91,7 @@ export default async function GalleryItemPage({ params }: GalleryItemPageProps) 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                   allowFullScreen
                 />
-              ) : (
+              ) : item.imageUrl ? (
                 <Image
                   src={item.imageUrl}
                   alt={item.title}
@@ -97,6 +99,10 @@ export default async function GalleryItemPage({ params }: GalleryItemPageProps) 
                   className="object-contain"
                   priority
                 />
+              ) : (
+                <div className="flex flex-col items-center justify-center text-slate-400 p-8 text-center">
+                  <span className="text-sm font-semibold">{item.title}</span>
+                </div>
               )}
             </div>
 
