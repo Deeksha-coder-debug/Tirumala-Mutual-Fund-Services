@@ -3,23 +3,83 @@
 /* Enable class-based dark mode for theme toggle */
 @custom-variant dark (&:where(.dark, .dark *));
 
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+}
+
+.bg-hexagon-pattern {
+    background-color: #0b1120;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 17.32v34.64L30 60 0 52.32V17.32z' fill='%23111827' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
 /* ============================================
    TMFS Enterprise Fintech Design System v2.0
    ============================================ */
 
 @theme {
-  /* Brand Colors — Primary (Deep Navy / Royal Blue) */
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-200: #bfdbfe;
-  --color-primary-300: #93c5fd;
-  --color-primary-400: #60a5fa;
-  --color-primary-500: #2563eb; /* Royal Blue */
-  --color-primary-600: #1d4ed8;
-  --color-primary-700: #1e40af;
-  --color-primary-800: #1e3a8a;
-  --color-primary-900: #0f172a; /* Deep Navy */
-  --color-primary-950: #020617; /* Void */
+  /* Brand Colors — Deep Navy (structure and trust) */
+  --color-primary-50: #f1f6fb;
+  --color-primary-100: #dce8f3;
+  --color-primary-200: #bfd3e5;
+  --color-primary-300: #94b5d0;
+  --color-primary-400: #648fb4;
+  --color-primary-500: #315f89;
+  --color-primary-600: #234d75;
+  --color-primary-700: #173c60;
+  --color-primary-800: #102f4d;
+  --color-primary-900: #0b1f3a;
+  --color-primary-950: #061426;
+
+  /* Brand Colors — Teal (actions and positive performance) */
+  --color-teal-50: #effcf9;
+  --color-teal-100: #ccfbf1;
+  --color-teal-200: #99f6e4;
+  --color-teal-300: #5eead4;
+  --color-teal-400: #2dd4bf;
+  --color-teal-500: #14b8a6;
+  --color-teal-600: #0f766e;
+  --color-teal-700: #0f625c;
+  --color-teal-800: #115e59;
+  --color-teal-900: #134e4a;
+  --color-teal-950: #042f2e;
+
+  /* Compatibility aliases for existing utility classes */
+  --color-slate-50: #f7f9fc;
+  --color-slate-100: #edf2f7;
+  --color-slate-200: #dce4ed;
+  --color-slate-300: #c1cedb;
+  --color-slate-400: #8b9caf;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #17314d;
+  --color-slate-900: #0b1f3a;
+  --color-slate-950: #061426;
+  --color-blue-300: #5eead4;
+  --color-blue-400: #2dd4bf;
+  --color-blue-500: #14b8a6;
+  --color-blue-600: #0f766e;
+  --color-blue-700: #0f625c;
+  --color-emerald-400: #2dd4bf;
+  --color-emerald-500: #14b8a6;
+  --color-emerald-600: #0f766e;
+  --color-emerald-700: #0f625c;
+  --color-amber-400: #f1c94a;
+  --color-amber-500: #d6a84f;
+  --color-amber-600: #c5a017;
+  --color-yellow-400: #f1c94a;
+  --color-yellow-500: #d6a84f;
+  --color-yellow-600: #c5a017;
 
   /* Brand Colors — Gold (Minimal, for accents only) */
   --color-gold-50: #fefcf3;
@@ -35,8 +95,10 @@
   --color-gold-950: #442507;
 
   /* Typography */
-  --font-heading: 'Poppins', system-ui, sans-serif;
+  --font-heading: 'Merriweather', Georgia, serif;
   --font-body: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Merriweather', Georgia, serif;
 
   /* Spacing System (8pt Grid) */
   --spacing-1: 0.25rem;  /* 4px */
@@ -94,10 +156,12 @@
 }
 
 /* === Base Styles === */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 }
 
 html {
@@ -127,7 +191,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 700;
   line-height: 1.2;
-  color: #0f172a;
+  color: var(--color-primary-900);
   letter-spacing: -0.02em;
 }
 
@@ -181,7 +245,7 @@ a {
   background: #64748b;
 }
 .dark ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: var(--color-primary-900);
 }
 .dark ::-webkit-scrollbar-thumb {
   background: #334155;
@@ -189,7 +253,14 @@ a {
 
 /* === Utilities === */
 .text-gradient {
-  background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-400) 100%);
+  background: linear-gradient(135deg, var(--color-teal-600) 0%, var(--color-teal-400) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .text-gradient {
+  background: linear-gradient(135deg, var(--color-gold-300) 0%, var(--color-gold-500) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -204,7 +275,7 @@ a {
 }
 
 .bg-gradient-hero {
-  background: linear-gradient(135deg, #0a0a0f 0%, #1a0a10 30%, #0f0a1a 70%, #0a0a0f 100%);
+  background: linear-gradient(135deg, var(--color-primary-950) 0%, var(--color-primary-900) 55%, var(--color-teal-950) 100%);
 }
 
 .glass {
@@ -225,7 +296,7 @@ a {
 
 .card-hover:hover {
   transform: translateY(-8px);
-  box-shadow: 0 25px 50px -12px rgba(139, 21, 38, 0.15);
+  box-shadow: 0 25px 50px -12px rgba(15, 118, 110, 0.15);
 }
 
 .section-padding {

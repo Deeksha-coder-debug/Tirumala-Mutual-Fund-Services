@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { SectionHeading } from '@/components/ui/section-heading';
 import { ChevronDown } from 'lucide-react';
 
 const faqs = [
@@ -40,14 +39,28 @@ export default function FAQ() {
   return (
     <section
       ref={ref}
-      className="section-padding bg-white dark:bg-[#0a0f1c] transition-colors"
+      className="section-padding bg-white dark:bg-slate-950 transition-colors"
       aria-label="Frequently Asked Questions"
     >
       <div className="container-custom max-w-4xl">
-        <SectionHeading 
-          title="Frequently Asked Questions" 
-          subtitle="Clear answers to common questions about investing and our services."
-        />
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-14"
+        >
+          <span className="inline-block px-3.5 py-1 rounded-full bg-primary-50 dark:bg-gold-500/15 border border-primary-200 dark:border-gold-500/30 text-primary-700 dark:text-gold-400 text-xs font-extrabold tracking-wider uppercase mb-4">
+            Have Questions?
+          </span>
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-4 font-heading text-slate-900 dark:text-white">
+            Frequently Asked{' '}
+            <span className="text-gradient">Questions</span>
+          </h2>
+          <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-base sm:text-lg font-medium">
+            Clear answers to common questions about investing and our services.
+          </p>
+        </motion.div>
 
         <div className="mt-12 space-y-4">
           {faqs.map((faq, index) => (
@@ -56,7 +69,7 @@ export default function FAQ() {
               initial={{ opacity: 0, y: 10 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="glass-card bg-slate-50 dark:bg-[#111827]/60 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden transition-all duration-300"
+              className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden transition-all duration-300"
             >
               <button
                 onClick={() => toggleFAQ(index)}
@@ -69,8 +82,8 @@ export default function FAQ() {
                 <span 
                   className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-transform duration-300 ${
                     openIndex === index 
-                      ? 'bg-primary-600 text-white rotate-180' 
-                      : 'bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
+                      ? 'bg-primary-600 dark:bg-gold-500 text-white dark:text-slate-900 rotate-180' 
+                      : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
                   }`}
                 >
                   <ChevronDown size={20} />
@@ -85,7 +98,7 @@ export default function FAQ() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                   >
-                    <div className="p-6 pt-0 text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-200 dark:border-slate-800/50 mt-2 pt-4">
+                    <div className="p-6 pt-0 text-slate-700 dark:text-slate-300 leading-relaxed border-t border-slate-200 dark:border-slate-800 mt-2 pt-4">
                       {faq.answer}
                     </div>
                   </motion.div>

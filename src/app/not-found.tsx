@@ -8,7 +8,7 @@ import { SITE_CONFIG, CONTACT_INFO } from '@/lib/constants';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0a0f1c] flex items-center justify-center px-6 transition-colors">
+    <div className="min-h-screen bg-slate-50 dark:bg-primary-950 flex items-center justify-center px-6 transition-colors">
       <div className="text-center max-w-xl">
         {/* Logo */}
         <motion.div

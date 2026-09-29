@@ -86,7 +86,7 @@ export default function SIPCalculatorPage() {
           </div>
 
           {/* Results */}
-          <div className="glass-card bg-gradient-to-br from-primary-900 to-[#0a0f1c] rounded-2xl p-8 shadow-xl text-white flex flex-col justify-center">
+          <div className="glass-card bg-gradient-to-br from-primary-900 to-primary-950 rounded-2xl p-8 shadow-xl text-white flex flex-col justify-center">
             <h3 className="text-xl font-bold font-heading mb-8 flex items-center gap-2 text-gold-400">
               <LineChart size={24} />
               Investment Projection
@@ -109,7 +109,7 @@ export default function SIPCalculatorPage() {
               </div>
             </div>
 
-            <button className="mt-8 w-full bg-gold-500 hover:bg-gold-600 text-[#0a0f1c] font-bold py-3 rounded-xl transition-colors">
+            <button className="mt-8 w-full bg-gold-500 hover:bg-gold-600 text-primary-950 font-bold py-3 rounded-xl transition-colors">
               Start SIP Now
             </button>
           </div>

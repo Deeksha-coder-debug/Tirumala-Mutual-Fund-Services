@@ -43,7 +43,7 @@ export default function InvestmentJourney() {
     <section
       id="investment-journey"
       ref={ref}
-      className="section-padding bg-slate-50 dark:bg-dark-1 transition-colors"
+      className="section-padding bg-white dark:bg-slate-950 transition-colors"
       aria-label="Investment Journey"
     >
       <div className="container-custom max-w-5xl">
@@ -75,29 +75,29 @@ export default function InvestmentJourney() {
                   <div className="hidden md:block w-1/2" />
 
                   {/* Icon Marker */}
-                  <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-50 dark:border-dark-1 shadow-lg shadow-primary-500/10 flex items-center justify-center z-10 hidden sm:flex">
-                    <Icon size={20} className="text-primary-600 dark:text-primary-400" />
+                  <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-50 dark:border-slate-950 shadow-lg shadow-primary-500/10 flex items-center justify-center z-10 hidden sm:flex">
+                    <Icon size={20} className="text-primary-600 dark:text-gold-400" />
                   </div>
 
                   {/* Content Card */}
                   <div className={`w-full sm:w-[calc(100%-4rem)] sm:ml-16 md:ml-0 md:w-1/2 flex ${isEven ? 'md:justify-end md:pr-12' : 'md:justify-start md:pl-12'}`}>
-                    <div className="glass-card bg-white dark:bg-[#111827]/80 rounded-2xl p-6 md:p-8 w-full border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 md:p-8 w-full border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-shadow group relative overflow-hidden">
                       {/* Mobile Icon (hidden on desktop) */}
-                      <div className="w-10 h-10 rounded-full bg-primary-50 dark:bg-primary-900/30 flex items-center justify-center sm:hidden mb-4 text-primary-600 dark:text-primary-400">
+                      <div className="w-10 h-10 rounded-full bg-primary-50 dark:bg-gold-500/15 flex items-center justify-center sm:hidden mb-4 text-primary-600 dark:text-gold-400">
                         <Icon size={18} />
                       </div>
 
-                      <div className="absolute top-0 left-0 w-1 h-full bg-primary-600 dark:bg-primary-500 origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-out" />
+                      <div className="absolute top-0 left-0 w-1 h-full bg-primary-600 dark:bg-gold-500 origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-out" />
                       
                       <div className="flex items-center gap-4 mb-3 relative w-full">
-                        <span className="text-primary-200 dark:text-slate-700 font-heading text-4xl font-black opacity-50 absolute right-6 top-6 pointer-events-none">
+                        <span className="text-primary-100 dark:text-slate-800 font-heading text-4xl font-black opacity-60 absolute right-6 top-6 pointer-events-none select-none">
                           0{index + 1}
                         </span>
                         <h3 className="text-xl font-bold text-slate-900 dark:text-white font-heading relative z-10">
                           {step.title}
                         </h3>
                       </div>
-                      <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed relative z-10">
+                      <p className="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed relative z-10">
                         {step.description}
                       </p>
                     </div>

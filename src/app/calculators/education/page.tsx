@@ -84,7 +84,7 @@ export default function EducationCalculatorPage() {
           </div>
 
           {/* Results */}
-          <div className="glass-card bg-gradient-to-br from-emerald-900 to-[#0a0f1c] rounded-2xl p-8 shadow-xl text-white flex flex-col justify-center">
+          <div className="glass-card bg-gradient-to-br from-teal-900 to-primary-950 rounded-2xl p-8 shadow-xl text-white flex flex-col justify-center">
             <h3 className="text-xl font-bold font-heading mb-8 flex items-center gap-2 text-emerald-400">
               <GraduationCap size={24} />
               Education Fund Projection

@@ -104,7 +104,7 @@ export default function RetirementCalculatorPage() {
           </div>
 
           {/* Results */}
-          <div className="glass-card bg-gradient-to-br from-indigo-900 to-[#0a0f1c] rounded-2xl p-8 shadow-xl text-white flex flex-col justify-center">
+          <div className="glass-card bg-gradient-to-br from-teal-900 to-primary-950 rounded-2xl p-8 shadow-xl text-white flex flex-col justify-center">
             <h3 className="text-xl font-bold font-heading mb-8 flex items-center gap-2 text-indigo-400">
               <Sunset size={24} />
               Retirement Blueprint

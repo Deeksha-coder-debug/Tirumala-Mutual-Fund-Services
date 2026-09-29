@@ -49,7 +49,7 @@ export default function CalculatorPreview() {
   return (
     <section
       ref={ref}
-      className="section-padding bg-white dark:bg-gray-950"
+      className="section-padding bg-white dark:bg-slate-950 transition-colors"
       aria-label="Investment calculators"
     >
       <div className="container-custom">
@@ -60,14 +60,14 @@ export default function CalculatorPreview() {
           transition={{ duration: 0.5 }}
           className="text-center mb-14"
         >
-          <span className="inline-block text-primary-700 dark:text-gold-400 text-sm font-semibold tracking-wider uppercase mb-3">
+          <span className="inline-block px-3.5 py-1 rounded-full bg-primary-50 dark:bg-gold-500/15 border border-primary-200 dark:border-gold-500/30 text-primary-700 dark:text-gold-400 text-xs font-extrabold tracking-wider uppercase mb-4">
             Plan Your Investments
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-4 font-heading">
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-4 font-heading text-slate-900 dark:text-white">
             Investment{' '}
             <span className="text-gradient">Calculators</span>
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-lg">
+          <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-base sm:text-lg font-medium">
             Use our advanced financial calculators to plan your investment journey with precision and clarity.
           </p>
         </motion.div>
@@ -83,20 +83,20 @@ export default function CalculatorPreview() {
             >
               <Link
                 href={calc.href}
-                className="group block bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 h-full border border-gray-100 dark:border-gray-800 card-hover hover:border-primary-200 dark:hover:border-primary-700/50 text-center"
+                className="group block bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 h-full border border-slate-200 dark:border-slate-800 card-hover hover:border-primary-300 dark:hover:border-gold-500/40 text-center transition-all"
               >
                 {/* Icon */}
                 <div className={`w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br ${calc.color} flex items-center justify-center text-white mb-5 group-hover:scale-110 group-hover:shadow-lg transition-all duration-300`}>
                   {calc.icon}
                 </div>
 
-                <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2 font-heading">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2 font-heading">
                   {calc.title}
                 </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">
+                <p className="text-sm text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
                   {calc.description}
                 </p>
-                <span className="inline-flex items-center gap-1 text-primary-600 dark:text-gold-400 text-sm font-semibold group-hover:gap-2 transition-all">
+                <span className="inline-flex items-center gap-1 text-primary-600 dark:text-gold-400 text-sm font-bold group-hover:gap-2 transition-all">
                   Calculate
                   <ArrowRight size={14} />
                 </span>

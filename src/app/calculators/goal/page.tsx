@@ -76,7 +76,7 @@ export default function GoalCalculatorPage() {
           </div>
 
           {/* Results */}
-          <div className="glass-card bg-gradient-to-br from-orange-900 to-[#0a0f1c] rounded-2xl p-8 shadow-xl text-white flex flex-col justify-center">
+          <div className="glass-card bg-gradient-to-br from-teal-900 to-primary-950 rounded-2xl p-8 shadow-xl text-white flex flex-col justify-center">
             <h3 className="text-xl font-bold font-heading mb-8 flex items-center gap-2 text-orange-400">
               <Target size={24} />
               Goal Investment Strategy

@@ -17,7 +17,7 @@ export default function MeetYourAdvisor() {
     <section
       id="advisor-section"
       ref={ref}
-      className="section-padding bg-white dark:bg-[#0a0f1c] transition-colors"
+      className="section-padding bg-white text-slate-900 dark:bg-slate-950 dark:text-white transition-colors pt-20 md:pt-24 pb-20 md:pb-24"
       aria-label="Meet Your Advisor"
     >
       <div className="container-custom max-w-6xl">
@@ -44,14 +44,14 @@ export default function MeetYourAdvisor() {
               
               {/* Floating Badge Bottom Left */}
               <div className="absolute bottom-6 left-6 z-20">
-                <div className="glass-card bg-white/90 dark:bg-[#111827]/90 p-4 rounded-xl shadow-lg border border-white/20 dark:border-slate-700/50 backdrop-blur-md">
+                <div className="bg-white/95 dark:bg-slate-900/95 p-4 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 backdrop-blur-md">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gold-100 dark:bg-gold-500/20 flex items-center justify-center text-gold-600 dark:text-gold-400">
+                    <div className="w-10 h-10 rounded-full bg-gold-50 dark:bg-gold-500/20 border border-gold-200 dark:border-gold-500/30 flex items-center justify-center text-gold-600 dark:text-gold-400">
                       <Award size={20} />
                     </div>
                     <div>
                       <p className="text-sm font-bold text-slate-900 dark:text-white">AMFI Certified</p>
-                      <p className="text-xs text-slate-500">Mutual Fund Distributor</p>
+                      <p className="text-xs text-slate-600 dark:text-slate-400">Mutual Fund Distributor</p>
                     </div>
                   </div>
                 </div>
@@ -65,22 +65,22 @@ export default function MeetYourAdvisor() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Badge variant="glass" className="mb-6 border-gold-200 dark:border-gold-500/30 bg-gold-50 dark:bg-gold-500/10 text-gold-700 dark:text-gold-400">
+            <Badge variant="glass" className="mb-6 border-gold-200 dark:border-gold-500/30 bg-gold-50 dark:bg-gold-500/10 text-primary-800 dark:text-gold-400">
               Your Financial Partner
             </Badge>
             
             <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 font-heading leading-tight">
-              Meet The Expert Behind <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-800 dark:from-gold-400 dark:to-gold-600">Your Wealth</span>
+              Meet The Expert Behind <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-700 to-primary-900 dark:from-gold-400 dark:to-gold-600">Your Wealth</span>
             </h2>
 
             <div className="relative mb-8">
-              <Quote size={48} className="absolute -top-4 -left-4 text-slate-100 dark:text-slate-800 -z-10 transform -scale-x-100" />
-              <p className="text-lg md:text-xl text-slate-700 dark:text-slate-300 font-medium italic leading-relaxed pl-6 border-l-4 border-gold-500">
+              <Quote size={48} className="absolute -top-4 -left-4 text-slate-200 dark:text-slate-800 -z-10 transform -scale-x-100" />
+              <p className="text-lg md:text-xl text-primary-800 dark:text-slate-300 font-medium italic leading-relaxed pl-6 border-l-4 border-gold-500">
                 "Our philosophy is simple: Investing shouldn't be gambling. It should be a disciplined, boring process that creates incredibly exciting results over time."
               </p>
             </div>
 
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+            <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-8 font-normal">
               With over 15 years of experience in the Indian financial markets, our founder has successfully navigated multiple market cycles. We don't just sell mutual funds; we architect financial freedom for our clients through rigorous research, absolute transparency, and long-term behavioral coaching.
             </p>
 
@@ -103,7 +103,7 @@ export default function MeetYourAdvisor() {
                 <h4 className="text-xl font-bold text-slate-900 dark:text-white font-heading">
                   Tirumala Talabaktula
                 </h4>
-                <p className="text-sm text-slate-500 font-medium">Founder & Principal Advisor, TMFS</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">Founder & Principal Advisor, TMFS</p>
               </div>
               <div className="ml-auto hidden sm:block">
                  {/* Signature */}

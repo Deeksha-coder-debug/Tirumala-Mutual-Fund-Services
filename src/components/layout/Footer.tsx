@@ -39,7 +39,7 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#050810] text-gray-300 relative overflow-hidden" role="contentinfo">
+    <footer className="bg-primary-950 text-gray-300 relative overflow-hidden" role="contentinfo">
       {/* Decorative gradient line */}
       <div className="h-1 bg-gradient-to-r from-primary-900 via-gold-500 to-primary-900 shadow-[0_0_20px_rgba(250,204,21,0.5)]" />
 
@@ -64,7 +64,7 @@ export default function Footer() {
                   Tirumala
                 </h3>
                 <p className="text-gold-400 text-xs tracking-wider uppercase">
-                  Mutual Fund Services
+                  MUTUAL FUND SERVICES
                 </p>
               </div>
             </Link>
@@ -75,25 +75,28 @@ export default function Footer() {
 
             <div className="space-y-3.5">
               <a href={`tel:${CONTACT_INFO.mobile}`} className="flex items-start gap-3 group text-sm hover:text-gold-400 transition-colors">
-                <Phone size={16} className="text-gold-400 mt-0.5 shrink-0" />
+                <Phone size={20} className="text-gold-400 mt-[2px] shrink-0" />
                 <div>
-                  <p>{CONTACT_INFO.mobileFormatted}</p>
-                  <p className="text-gray-500 text-xs">Landline: {CONTACT_INFO.landline}</p>
+                  <p className="text-gray-200">{CONTACT_INFO.mobileFormatted}</p>
+                  <p className="text-gray-400 text-xs">Landline: {CONTACT_INFO.landline}</p>
                 </div>
               </a>
-              <a href={`mailto:${CONTACT_INFO.email}`} className="flex items-center gap-3 group text-sm hover:text-gold-400 transition-colors">
-                <Mail size={16} className="text-gold-400 shrink-0" />
-                <span>{CONTACT_INFO.email}</span>
+              <a href={`mailto:${CONTACT_INFO.email}`} className="flex items-start gap-3 group text-sm hover:text-gold-400 transition-colors">
+                <Mail size={20} className="text-gold-400 mt-[2px] shrink-0" />
+                <span className="text-gray-200">{CONTACT_INFO.email}</span>
               </a>
               <div className="flex items-start gap-3 text-sm">
-                <MapPin size={16} className="text-gold-400 mt-0.5 shrink-0" />
-                <span>{CONTACT_INFO.address.full}</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm">
-                <Clock size={16} className="text-gold-400 shrink-0" />
+                <MapPin size={20} className="text-gold-400 mt-[2px] shrink-0" />
                 <div>
-                  <p>{CONTACT_INFO.officeHours.days}</p>
-                  <p className="text-gray-500 text-xs">{CONTACT_INFO.officeHours.time} | {CONTACT_INFO.officeHours.closed}</p>
+                  <p className="text-gray-200">{CONTACT_INFO.address.full.split(' (')[0]}</p>
+                  <p className="text-gray-400 text-xs">({CONTACT_INFO.address.coordinates})</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 text-sm">
+                <Clock size={20} className="text-gold-400 mt-[2px] shrink-0" />
+                <div>
+                  <p className="text-gray-200">{CONTACT_INFO.officeHours.days}</p>
+                  <p className="text-gray-400 text-xs">{CONTACT_INFO.officeHours.time} | {CONTACT_INFO.officeHours.closed}</p>
                 </div>
               </div>
             </div>
@@ -105,7 +108,7 @@ export default function Footer() {
                   href={SOCIAL_LINKS.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#111827] border border-slate-800 flex items-center justify-center text-slate-300 hover:bg-gold-500 hover:text-[#050810] hover:border-gold-500 hover:shadow-[0_0_15px_rgba(250,204,21,0.4)] transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-primary-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:bg-gold-500 hover:text-primary-950 hover:border-gold-500 hover:shadow-[0_0_15px_rgba(214,168,79,0.4)] transition-all duration-300"
                   aria-label="Facebook"
                 >
                   <Facebook size={18} />
@@ -116,7 +119,7 @@ export default function Footer() {
                   href={SOCIAL_LINKS.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#111827] border border-slate-800 flex items-center justify-center text-slate-300 hover:bg-gold-500 hover:text-[#050810] hover:border-gold-500 hover:shadow-[0_0_15px_rgba(250,204,21,0.4)] transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-primary-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:bg-gold-500 hover:text-primary-950 hover:border-gold-500 hover:shadow-[0_0_15px_rgba(214,168,79,0.4)] transition-all duration-300"
                   aria-label="Instagram"
                 >
                   <Instagram size={18} />
@@ -131,14 +134,14 @@ export default function Footer() {
               <span className="w-8 h-0.5 bg-gold-500 rounded" />
               Quick Links
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm hover:text-gold-400 transition-colors duration-200 flex items-center gap-2 group"
+                    className="text-sm hover:text-white transition-all duration-200 flex items-center gap-2 group hover:translate-x-1"
                   >
-                    <ArrowRight size={12} className="text-gold-500/50 group-hover:text-gold-400 group-hover:translate-x-1 transition-all duration-200" />
+                    <ArrowRight size={12} className="text-gold-500/50 group-hover:text-white transition-all duration-200" />
                     {link.label}
                   </Link>
                 </li>
@@ -152,14 +155,14 @@ export default function Footer() {
               <span className="w-8 h-0.5 bg-gold-500 rounded" />
               Our Services
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {serviceLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm hover:text-gold-400 transition-colors duration-200 flex items-center gap-2 group"
+                    className="text-sm hover:text-white transition-all duration-200 flex items-center gap-2 group hover:translate-x-1"
                   >
-                    <ArrowRight size={12} className="text-gold-500/50 group-hover:text-gold-400 group-hover:translate-x-1 transition-all duration-200" />
+                    <ArrowRight size={12} className="text-gold-500/50 group-hover:text-white transition-all duration-200" />
                     {link.label}
                   </Link>
                 </li>
@@ -167,47 +170,20 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Newsletter & CTA */}
+          {/* Column 4: Regulatory Info */}
           <div>
             <h4 className="text-white font-bold text-base mb-6 font-heading flex items-center gap-2">
               <span className="w-8 h-0.5 bg-gold-500 rounded" />
-              Start Your Wealth Journey
+              Regulatory Info
             </h4>
-            <p className="text-sm mb-6 text-gray-400 leading-relaxed">
-              Take the first step towards financial freedom. Book a free consultation with our experienced financial advisor.
-            </p>
 
-            <div className="space-y-3">
-              <Link
-                href="/contact"
-                className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-primary-800 to-primary-700 text-white py-3 rounded-xl font-semibold text-sm hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-lg shadow-primary-800/30"
-              >
-                Book Free Consultation
-              </Link>
-              <a
-                href={CONTACT_INFO.whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full bg-green-600 text-white py-3 rounded-xl font-semibold text-sm hover:bg-green-700 transition-all duration-300"
-              >
-                WhatsApp Us
-              </a>
-              <a
-                href={`tel:${CONTACT_INFO.mobile}`}
-                className="flex items-center justify-center gap-2 w-full border border-gold-500/30 text-gold-400 py-3 rounded-xl font-semibold text-sm hover:bg-gold-500/10 transition-all duration-300"
-              >
-                <Phone size={14} />
-                Call Now
-              </a>
-            </div>
-
-            {/* Registration Badge */}
-            <div className="mt-6 p-4 rounded-xl bg-white/5 border border-white/5">
-              <p className="text-gold-400 font-bold text-sm mb-1">{BUSINESS_INFO.arn}</p>
-              <p className="text-gray-400 text-xs leading-relaxed">
+            {/* Registration Details */}
+            <div>
+              <p className="text-gold-400 font-bold mb-1">{BUSINESS_INFO.arn}</p>
+              <p className="text-gray-400 text-sm leading-relaxed">
                 {BUSINESS_INFO.registration}
               </p>
-              <p className="text-gray-500 text-xs mt-1">
+              <p className="text-gray-400 text-sm mt-1">
                 {BUSINESS_INFO.sebiStatus}
               </p>
             </div>
@@ -216,24 +192,22 @@ export default function Footer() {
       </div>
 
       {/* Disclaimer Bar */}
-      <div className="border-t border-white/5">
-        <div className="container-custom py-5">
-          <div className="bg-primary-950/50 rounded-xl p-4 border border-primary-900/20">
-            <p className="text-xs text-gray-500 leading-relaxed text-center">
-              <span className="text-gold-500 font-semibold">Disclaimer:</span>{' '}
-              {DISCLAIMER_TEXT}
-            </p>
-          </div>
+      <div className="border-t border-gray-800">
+        <div className="container-custom py-4">
+          <p className="text-xs text-gray-500 leading-relaxed text-center">
+            <span className="text-gold-500 font-semibold">Disclaimer:</span>{' '}
+            {DISCLAIMER_TEXT}
+          </p>
         </div>
       </div>
 
       {/* Copyright Bar */}
-      <div className="border-t border-white/5">
+      <div className="border-t border-gray-800">
         <div className="container-custom py-5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-gray-500">
             © {new Date().getFullYear()} Tirumala Mutual Fund Services. All rights reserved.
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-end gap-4">
             {legalLinks.map((link) => (
               <Link
                 key={link.href}
