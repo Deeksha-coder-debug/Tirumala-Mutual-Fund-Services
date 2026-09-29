@@ -2,7 +2,9 @@ import { Metadata } from 'next';
 import { SectionHeading } from '@/components/ui/section-heading';
 import GalleryClient from '@/components/gallery/GalleryClient';
 import PublicSiteShell from '@/components/layout/PublicSiteShell';
-import { CMS_GALLERY } from '@/lib/cms-data';
+import { getGalleryItems } from '@/lib/cms-storage';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Gallery & Media | Tirumala Mutual Fund Services',
@@ -10,7 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default function GalleryPage() {
-  const sortedGallery = [...CMS_GALLERY].sort((a, b) => 
+  const galleryItems = getGalleryItems();
+  const sortedGallery = [...galleryItems].sort((a, b) => 
     new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
   );
 

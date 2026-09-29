@@ -3,18 +3,23 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, MapPin, Calendar, Users, Award, ShieldCheck, Download, Share2 } from 'lucide-react';
-import { CMS_GALLERY } from '@/lib/cms-data';
+import { getGalleryItems } from '@/lib/cms-storage';
 import { SectionHeading } from '@/components/ui/section-heading';
 import PublicSiteShell from '@/components/layout/PublicSiteShell';
 
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+
 interface GalleryItemPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: GalleryItemPageProps): Promise<Metadata> {
-  const item = CMS_GALLERY.find(g => g.slug === params.slug);
+  const { slug } = await params;
+  const allGallery = getGalleryItems();
+  const item = allGallery.find(g => g.slug === slug);
   if (!item) return { title: 'Item Not Found' };
   
   return {
@@ -28,13 +33,15 @@ export async function generateMetadata({ params }: GalleryItemPageProps): Promis
 
 // Generate static params for all known slugs for optimal performance
 export function generateStaticParams() {
-  return CMS_GALLERY.map((item) => ({
+  return getGalleryItems().map((item) => ({
     slug: item.slug,
   }));
 }
 
-export default function GalleryItemPage({ params }: GalleryItemPageProps) {
-  const item = CMS_GALLERY.find(g => g.slug === params.slug);
+export default async function GalleryItemPage({ params }: GalleryItemPageProps) {
+  const { slug } = await params;
+  const allGallery = getGalleryItems();
+  const item = allGallery.find(g => g.slug === slug);
   
   if (!item) {
     notFound();

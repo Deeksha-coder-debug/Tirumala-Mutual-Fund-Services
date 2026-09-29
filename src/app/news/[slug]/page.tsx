@@ -2,18 +2,26 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, User, Tag, Download, Share2, TrendingUp, AlertTriangle, FileText } from 'lucide-react';
-import { CMS_NEWS } from '@/lib/cms-data';
+import { getNewsItems } from '@/lib/cms-storage';
 import { NfoCard, IpoCard, NewsCard } from '@/components/news/NewsCards';
 import PublicSiteShell from '@/components/layout/PublicSiteShell';
+import { getYoutubeEmbedUrl } from '@/lib/youtube';
+import { formatDisplayDate } from '@/lib/date-utils';
+import { Play } from 'lucide-react';
+
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
 
 interface NewsItemPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: NewsItemPageProps): Promise<Metadata> {
-  const item = CMS_NEWS.find(n => n.slug === params.slug);
+  const { slug } = await params;
+  const allNews = getNewsItems();
+  const item = allNews.find(n => n.slug === slug);
   if (!item) return { title: 'Article Not Found' };
   
   return {
@@ -23,17 +31,21 @@ export async function generateMetadata({ params }: NewsItemPageProps): Promise<M
 }
 
 export function generateStaticParams() {
-  return CMS_NEWS.map((item) => ({
+  return getNewsItems().map((item) => ({
     slug: item.slug,
   }));
 }
 
-export default function NewsItemPage({ params }: NewsItemPageProps) {
-  const item = CMS_NEWS.find(n => n.slug === params.slug);
+export default async function NewsItemPage({ params }: NewsItemPageProps) {
+  const { slug } = await params;
+  const allNews = getNewsItems();
+  const item = allNews.find(n => n.slug === slug);
   
   if (!item) {
     notFound();
   }
+
+  const embedUrl = getYoutubeEmbedUrl(item.youtubeUrl || item.videoUrl);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -48,7 +60,7 @@ export default function NewsItemPage({ params }: NewsItemPageProps) {
   };
 
   // Find 3 related items (excluding current)
-  const relatedItems = CMS_NEWS.filter(n => n.id !== item.id).slice(0, 3);
+  const relatedItems = allNews.filter(n => n.id !== item.id).slice(0, 3);
 
   return (
     <PublicSiteShell>
@@ -85,18 +97,18 @@ export default function NewsItemPage({ params }: NewsItemPageProps) {
                 </button>
               </div>
 
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white mb-8 font-heading leading-tight">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 font-heading leading-tight">
                 {item.title}
               </h1>
 
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-gray-600 dark:text-gray-400 mb-10 pb-8 border-b border-gray-100 dark:border-gray-700">
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-gray-600 dark:text-gray-400 mb-8 pb-6 border-b border-gray-100 dark:border-gray-700">
                 <div className="flex items-center gap-2">
                   <User size={16} className="text-primary-600 dark:text-gold-400" />
                   {item.author}
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar size={16} className="text-primary-600 dark:text-gold-400" />
-                  {new Date(item.publishDate).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  {formatDisplayDate(item.publishDate)}
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock size={16} className="text-primary-600 dark:text-gold-400" />
@@ -104,24 +116,74 @@ export default function NewsItemPage({ params }: NewsItemPageProps) {
                 </div>
               </div>
 
-              {/* Specific Metadata for NFO/IPO */}
-              {(item.category === 'NFO' || item.category === 'IPO') && (
-                <div className="bg-gray-50 dark:bg-gray-900/50 rounded-2xl p-6 mb-10 grid grid-cols-2 md:grid-cols-4 gap-6">
-                  {item.launchDate && (
-                    <div>
-                      <span className="text-sm text-gray-500 block mb-1">Open Date</span>
-                      <span className="font-bold text-gray-900 dark:text-white">{new Date(item.launchDate).toLocaleDateString()}</span>
+              {/* YouTube Video Embed Section */}
+              {embedUrl && (
+                <div className="mb-8">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-950/60 flex items-center justify-center text-red-600">
+                      <Play size={16} className="fill-red-600 ml-0.5" />
                     </div>
-                  )}
-                  {item.closeDate && (
                     <div>
-                      <span className="text-sm text-gray-500 block mb-1">Close Date</span>
-                      <span className="font-bold text-gray-900 dark:text-white">{new Date(item.closeDate).toLocaleDateString()}</span>
+                      <h3 className="text-base font-bold text-gray-900 dark:text-white font-heading">
+                        Official Video Walkthrough & Analysis
+                      </h3>
+                      <p className="text-xs text-gray-500">Watch the detailed fund presentation and scheme insights</p>
+                    </div>
+                  </div>
+                  <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-xl bg-black">
+                    <iframe
+                      src={embedUrl}
+                      title={`${item.title} - Video Analysis`}
+                      className="absolute inset-0 w-full h-full border-0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Cover Banner Image (if available) */}
+              {item.imageUrl && (
+                <div className="relative w-full h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden mb-8 border border-slate-200 dark:border-slate-700 shadow-md bg-slate-100 dark:bg-slate-900">
+                  <img
+                    src={item.imageUrl}
+                    alt={item.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+
+              {/* Lead Summary Excerpt */}
+              {item.excerpt && (
+                <div className="p-5 mb-8 rounded-2xl bg-amber-50/80 dark:bg-amber-950/20 border-l-4 border-gold-500 text-slate-800 dark:text-slate-200 font-medium text-base leading-relaxed whitespace-pre-line">
+                  {item.excerpt}
+                </div>
+              )}
+
+              {/* Specific Metadata for NFO / IPO */}
+              {(item.category === 'NFO' || item.category === 'IPO') && (
+                <div className="bg-gray-50 dark:bg-gray-900/50 rounded-2xl p-6 mb-10 grid grid-cols-2 md:grid-cols-4 gap-6 border border-gray-100 dark:border-gray-800">
+                  <div>
+                    <span className="text-xs text-gray-500 block mb-1">Starting Date</span>
+                    <span className="font-bold text-gray-900 dark:text-white">
+                      {formatDisplayDate(item.launchDate)}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-xs text-gray-500 block mb-1">Last Date</span>
+                    <span className="font-bold text-gray-900 dark:text-white">
+                      {formatDisplayDate(item.closeDate)}
+                    </span>
+                  </div>
+                  {item.fundCategory && (
+                    <div>
+                      <span className="text-xs text-gray-500 block mb-1">Fund Category</span>
+                      <span className="font-bold text-gray-900 dark:text-white">{item.fundCategory}</span>
                     </div>
                   )}
                   {item.riskLevel && (
                     <div>
-                      <span className="text-sm text-gray-500 block mb-1">Risk Level</span>
+                      <span className="text-xs text-gray-500 block mb-1">Risk Meter</span>
                       <span className="font-bold text-gray-900 dark:text-white flex items-center gap-1">
                         <AlertTriangle size={14} className="text-orange-500" /> {item.riskLevel}
                       </span>
@@ -129,19 +191,19 @@ export default function NewsItemPage({ params }: NewsItemPageProps) {
                   )}
                   {item.issueSize && (
                     <div>
-                      <span className="text-sm text-gray-500 block mb-1">Issue Size</span>
+                      <span className="text-xs text-gray-500 block mb-1">Issue Size</span>
                       <span className="font-bold text-gray-900 dark:text-white">{item.issueSize}</span>
                     </div>
                   )}
                   {item.priceBand && (
                     <div>
-                      <span className="text-sm text-gray-500 block mb-1">Price Band</span>
+                      <span className="text-xs text-gray-500 block mb-1">Price Band</span>
                       <span className="font-bold text-gray-900 dark:text-white">{item.priceBand}</span>
                     </div>
                   )}
                   {item.gmp && (
                     <div>
-                      <span className="text-sm text-gray-500 block mb-1">Expected GMP</span>
+                      <span className="text-xs text-gray-500 block mb-1">Expected GMP</span>
                       <span className="font-bold text-green-600 flex items-center gap-1">
                         <TrendingUp size={14} /> {item.gmp}
                       </span>
@@ -152,7 +214,7 @@ export default function NewsItemPage({ params }: NewsItemPageProps) {
 
               {/* Main Content */}
               <div 
-                className="prose prose-lg dark:prose-invert max-w-none mb-12"
+                className="prose prose-lg dark:prose-invert max-w-none mb-12 whitespace-pre-line"
                 dangerouslySetInnerHTML={{ __html: item.content }}
               />
 

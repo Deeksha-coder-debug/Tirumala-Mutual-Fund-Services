@@ -1,0 +1,72 @@
+[
+  {
+    "id": "g1",
+    "slug": "investor-awareness-jeypore-2026",
+    "title": "Financial Literacy & Investor Awareness Program",
+    "category": "Seminars",
+    "type": "album",
+    "status": "published",
+    "publishDate": "2026-02-15T10:00:00Z",
+    "location": "Jeypore Town Hall, Odisha",
+    "metrics": "250+ Investors Attended",
+    "imageUrl": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1000&auto=format&fit=crop",
+    "description": "A comprehensive session covering the basics of mutual funds, SIPs, and long-term wealth creation. Speakers included top fund managers and our MD, Mr. Tirumala Talabaktula.",
+    "featured": true,
+    "downloadable": true
+  },
+  {
+    "id": "g2",
+    "slug": "best-distributor-award-2025",
+    "title": "Best Mutual Fund Distributor - East Zone",
+    "category": "Awards",
+    "type": "image",
+    "status": "published",
+    "publishDate": "2025-11-20T10:00:00Z",
+    "location": "Mumbai",
+    "imageUrl": "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?q=80&w=1000&auto=format&fit=crop",
+    "description": "Recognized for outstanding AUM growth and investor education initiatives.",
+    "featured": true,
+    "downloadable": false
+  },
+  {
+    "id": "g3",
+    "slug": "amfi-registration-certificate",
+    "title": "AMFI Registration Certificate (ARN-144270)",
+    "category": "Certificates",
+    "type": "image",
+    "status": "published",
+    "publishDate": "2011-01-01T10:00:00Z",
+    "imageUrl": "https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=1000&auto=format&fit=crop",
+    "description": "Official AMFI Registration Certificate confirming our status as a certified Mutual Fund Distributor.",
+    "downloadable": true
+  },
+  {
+    "id": "g4",
+    "slug": "market-outlook-q1-2026",
+    "title": "Q1 2026 Market Outlook Session",
+    "category": "Videos",
+    "type": "video",
+    "status": "published",
+    "publishDate": "2026-01-10T10:00:00Z",
+    "location": "TMFS Office / YouTube Live",
+    "metrics": "15 min watch",
+    "imageUrl": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1000&auto=format&fit=crop",
+    "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "description": "Analyzing the upcoming budget and strategic portfolio alignments for 2026.",
+    "downloadable": false
+  },
+  {
+    "id": "g5",
+    "slug": "client-meet-and-greet-2025",
+    "title": "Annual Client Meet & Greet",
+    "category": "Client Meets",
+    "type": "image",
+    "status": "published",
+    "publishDate": "2025-12-15T10:00:00Z",
+    "location": "Mayfair, Bhubaneswar",
+    "metrics": "100+ HNI Clients",
+    "imageUrl": "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1000&auto=format&fit=crop",
+    "description": "Celebrating a successful year of wealth creation with our premium clients.",
+    "downloadable": true
+  }
+]

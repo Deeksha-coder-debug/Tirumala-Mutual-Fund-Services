@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { 
   LayoutDashboard, PieChart, TrendingUp, Users, LogOut, ShieldCheck, 
   Lock, BadgeCheck, Clock, User as UserIcon, AlertTriangle, BarChart3, 
-  FileText, MessageSquare
+  FileText, MessageSquare, Shield
 } from 'lucide-react';
 
 function PortalContent() {
@@ -40,6 +40,12 @@ function PortalContent() {
     role: 'ADMIN',
     image: null,
   };
+
+  const userEmail = (user.email || '').toLowerCase().trim();
+  const isAdmin =
+    user.role === 'ADMIN' ||
+    userEmail === 'tiru.jeypore@gmail.com' ||
+    userEmail === 'deeksha.jeypore@gmail.com';
 
   return (
     <div data-theme="light" className="light-theme min-h-screen bg-slate-50 !text-slate-900 font-sans flex flex-col">
@@ -141,6 +147,24 @@ function PortalContent() {
             </button>
           </div>
 
+          {isAdmin && (
+            <div className="pt-4 mt-4 border-t border-slate-200">
+              <Link
+                href="/admin"
+                className="w-full flex items-center justify-between px-4 py-3 rounded-xl font-bold text-sm bg-gradient-to-r from-gold-500 to-amber-500 !text-slate-950 shadow-md hover:brightness-105 transition-all cursor-pointer group"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Shield className="w-4 h-4 text-slate-950 shrink-0" />
+                  <span className="!text-slate-950 font-black">Admin Console</span>
+                </div>
+                <span className="text-xs font-black">→</span>
+              </Link>
+              <p className="text-[10px] text-slate-500 font-medium px-1 mt-1.5 leading-snug">
+                Media Uploads, NFOs, Leads & WhatsApp Broadcasts
+              </p>
+            </div>
+          )}
+
           <div className="pt-6 border-t border-slate-200 mt-6">
             <Link
               href="/"
@@ -153,6 +177,8 @@ function PortalContent() {
 
         {/* Right Workspace Content Area */}
         <main className="flex-1 p-6 md:p-10 max-w-6xl">
+
+
           {error === 'unauthorized' && (
             <div className="mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 !text-amber-800 flex items-center justify-between gap-4 shadow-sm">
               <div className="flex items-center gap-3">

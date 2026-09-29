@@ -3,17 +3,7 @@ import Google from 'next-auth/providers/google';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@/lib/prisma';
 import { Role } from '@prisma/client';
-import { authConfig } from './auth.config';
-
-// List of Admin/Director emails that automatically receive ADMIN privileges
-const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || '')
-  .split(',')
-  .map((e) => e.trim().toLowerCase());
-
-// List of Advisor emails that automatically receive ADVISOR privileges
-const ADVISOR_EMAILS = (process.env.ADVISOR_EMAILS || '')
-  .split(',')
-  .map((e) => e.trim().toLowerCase());
+import { authConfig, ADMIN_EMAILS, ADVISOR_EMAILS } from './auth.config';
 
 // Use Prisma adapter if DATABASE_URL is available
 const useDb = !!process.env.DATABASE_URL;
@@ -26,6 +16,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     Google({
       clientId: process.env.AUTH_GOOGLE_ID || '',
       clientSecret: process.env.AUTH_GOOGLE_SECRET || '',
+      authorization: {
+        params: {
+          prompt: 'select_account',
+          access_type: 'offline',
+          response_type: 'code',
+        },
+      },
     }),
   ],
   callbacks: {

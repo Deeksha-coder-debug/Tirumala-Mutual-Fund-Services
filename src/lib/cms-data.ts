@@ -15,8 +15,9 @@ export interface GalleryItem {
   publishDate: string;
   location?: string;
   metrics?: string; // e.g., "250+ Participants"
-  imageUrl: string;
-  videoUrl?: string; // If type is video
+  imageUrl?: string;
+  videoUrl?: string; // MP4 or external video
+  youtubeUrl?: string; // YouTube watch or share URL
   description?: string;
   featured?: boolean;
   downloadable?: boolean;
@@ -34,6 +35,9 @@ export interface NewsItem {
   excerpt: string;
   content: string; // HTML or Markdown string (using HTML for simplicity here)
   tags: string[];
+  imageUrl?: string;
+  videoUrl?: string;
+  youtubeUrl?: string;
   featured?: boolean;
   
   // Specific to NFO / IPO

@@ -20,7 +20,7 @@ function LoginContent() {
   const handleGoogleSignIn = async () => {
     try {
       setIsLoading(true);
-      await signIn('google', { callbackUrl });
+      await signIn('google', { callbackUrl, prompt: 'select_account' });
     } catch (err) {
       console.error('Sign in error:', err);
       setIsLoading(false);
@@ -123,14 +123,14 @@ function LoginContent() {
           </div>
         </button>
 
-        {/* Demo Portal Access Button (For instant local preview) */}
+        {/* Demo Portal Access Button (For instant preview) */}
         {process.env.NODE_ENV !== 'production' && (
           <button
             onClick={handleDemoSignIn}
-            className="flex w-full items-center justify-center gap-2 rounded-xl border border-gold-300 bg-gold-50 px-4 py-3 text-xs font-bold text-gold-800 transition-colors hover:bg-gold-100 cursor-pointer"
+            className="flex w-full items-center justify-center gap-2 rounded-xl border border-gold-300 bg-gold-50 px-4 py-3 text-xs font-bold text-gold-900 transition-colors hover:bg-gold-100 cursor-pointer"
           >
-            <Sparkles className="w-4 h-4 text-gold-400" />
-            <span>Explore Investor Portal (Demo Mode)</span>
+            <Sparkles className="w-4 h-4 text-gold-500" />
+            <span>Explore Investor Client Portal</span>
           </button>
         )}
       </div>

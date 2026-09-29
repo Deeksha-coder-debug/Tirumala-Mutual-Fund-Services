@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Download, Share2, ZoomIn } from 'lucide-react';
 import Image from 'next/image';
 import { GalleryItem } from '@/lib/cms-data';
+import { getYoutubeEmbedUrl, getYoutubeThumbnail } from '@/lib/youtube';
 
 interface LightboxProps {
   item: GalleryItem | null;
@@ -57,8 +58,10 @@ export function Lightbox({ item, isOpen, onClose, onNext, onPrev }: LightboxProp
 
   const handleDownload = () => {
     if (!item || !item.downloadable) return;
+    const downloadSrc = item.imageUrl || getYoutubeThumbnail(item.youtubeUrl);
+    if (!downloadSrc) return;
     const link = document.createElement('a');
-    link.href = item.imageUrl;
+    link.href = downloadSrc;
     link.download = `${item.slug}.jpg`;
     document.body.appendChild(link);
     link.click();
@@ -66,6 +69,10 @@ export function Lightbox({ item, isOpen, onClose, onNext, onPrev }: LightboxProp
   };
 
   if (!isOpen || !item) return null;
+
+  const ytEmbed = getYoutubeEmbedUrl(item.youtubeUrl || item.videoUrl);
+  const displayImage = item.imageUrl || getYoutubeThumbnail(item.youtubeUrl) || '/images/default.jpg';
+  const isDirectMp4 = item.videoUrl?.endsWith('.mp4') || item.imageUrl?.endsWith('.mp4');
 
   return (
     <AnimatePresence>
@@ -110,19 +117,26 @@ export function Lightbox({ item, isOpen, onClose, onNext, onPrev }: LightboxProp
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           >
-            {item.type === 'video' && item.videoUrl ? (
-              <div className="w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden ring-1 ring-white/10 shadow-2xl">
+            {ytEmbed ? (
+              <div className="w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-2xl">
                 <iframe 
-                  src={item.videoUrl.replace('watch?v=', 'embed/')} 
+                  src={`${ytEmbed}?autoplay=1&rel=0`} 
                   className="w-full h-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                   allowFullScreen
                 />
               </div>
+            ) : isDirectMp4 ? (
+              <video 
+                src={item.videoUrl || item.imageUrl} 
+                controls 
+                autoPlay 
+                className="w-full max-w-4xl max-h-[70vh] rounded-2xl bg-black shadow-2xl" 
+              />
             ) : (
               <div className="relative w-full h-full max-h-full">
                 <Image
-                  src={item.imageUrl}
+                  src={displayImage}
                   alt={item.title}
                   fill
                   className="object-contain"

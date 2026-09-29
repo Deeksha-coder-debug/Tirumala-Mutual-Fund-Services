@@ -2,7 +2,10 @@ import { Metadata } from 'next';
 import { SectionHeading } from '@/components/ui/section-heading';
 import NewsClient from '@/components/news/NewsClient';
 import PublicSiteShell from '@/components/layout/PublicSiteShell';
-import { CMS_NEWS } from '@/lib/cms-data';
+import { getNewsItems } from '@/lib/cms-storage';
+import { formatDisplayDate } from '@/lib/date-utils';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'News, NFOs & IPOs | Tirumala Mutual Fund Services',
@@ -10,7 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default function NewsPage() {
-  const sortedNews = [...CMS_NEWS].sort((a, b) => 
+  const newsList = getNewsItems();
+  const sortedNews = [...newsList].sort((a, b) => 
     new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
   );
 
@@ -22,7 +26,8 @@ export default function NewsPage() {
         {stickyAnnouncement && (
           <div className="bg-primary-950/90 border border-gold-500/30 text-white py-3 px-4 text-sm font-medium text-center relative z-10 shadow-md max-w-5xl mx-auto mb-8 rounded-2xl">
             <span className="bg-red-600 text-white px-2 py-0.5 rounded text-xs font-bold mr-2 uppercase animate-pulse">Important NFO</span>
-            {stickyAnnouncement.title} closes on {new Date(stickyAnnouncement.closeDate!).toLocaleDateString()}. 
+            {stickyAnnouncement.title}
+            {stickyAnnouncement.closeDate ? ` closes on ${formatDisplayDate(stickyAnnouncement.closeDate)}.` : ' is currently open for investment.'}
             <a href={`/news/${stickyAnnouncement.slug}`} className="ml-2 text-gold-400 hover:text-gold-300 underline font-bold">Apply Now →</a>
           </div>
         )}

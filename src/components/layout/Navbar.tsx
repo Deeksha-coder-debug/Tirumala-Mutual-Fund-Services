@@ -37,6 +37,11 @@ export default function Navbar() {
   };
 
   const user = session?.user;
+  const userEmail = (user?.email || '').toLowerCase().trim();
+  const isAdmin =
+    user?.role === 'ADMIN' ||
+    userEmail === 'tiru.jeypore@gmail.com' ||
+    userEmail === 'deeksha.jeypore@gmail.com';
 
   return (
     <>
@@ -143,90 +148,103 @@ export default function Navbar() {
 
             {/* Auth Session State / CTA Button */}
             {status === 'authenticated' && user ? (
-              <div className="relative hidden md:block" onMouseLeave={() => setUserDropdownOpen(false)}>
-                <button
-                  onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex items-center gap-2.5 p-1 pl-3.5 pr-2 rounded-full bg-slate-900/90 border border-gold-500/40 text-white hover:border-gold-400 transition-all cursor-pointer shadow-lg"
-                >
-                  <span className="text-xs font-bold max-w-[110px] truncate text-slate-100">
-                    {user.name?.split(' ')[0] || 'Account'}
-                  </span>
-                  {user.image ? (
-                    <Image
-                      src={user.image}
-                      alt={user.name || 'User'}
-                      width={30}
-                      height={30}
-                      className="rounded-full border border-gold-400 object-cover"
-                    />
-                  ) : (
-                    <div className="w-7 h-7 rounded-full bg-gold-500/20 border border-gold-500/40 flex items-center justify-center text-gold-400 text-xs font-bold">
-                      {user.name?.[0] || 'U'}
-                    </div>
-                  )}
-                </button>
+              <div className="hidden md:flex items-center gap-2.5">
+                {/* Admin Console Direct Header Button */}
+                {isAdmin && (
+                  <Link
+                    href="/admin"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gold-500/15 hover:bg-gold-500/25 border border-gold-500/40 text-gold-400 text-xs font-bold transition-all shadow-sm group"
+                  >
+                    <Shield className="w-3.5 h-3.5 text-gold-400 group-hover:scale-110 transition-transform" />
+                    <span>Admin Console</span>
+                  </Link>
+                )}
 
-                {/* User Dropdown */}
-                <AnimatePresence>
-                  {userDropdownOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      className="absolute right-0 mt-2 w-60 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl py-2 z-50 text-slate-200 text-sm"
-                    >
-                      <div className="px-4 py-3 border-b border-slate-800/80">
-                        <p className="font-bold text-white truncate">{user.name}</p>
-                        <p className="text-xs text-slate-400 truncate">{user.email}</p>
-                        <span className="inline-block mt-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-gold-500/20 text-gold-400 border border-gold-500/30 uppercase tracking-wider">
-                          {user.role || 'CUSTOMER'}
-                        </span>
+                <div className="relative" onMouseLeave={() => setUserDropdownOpen(false)}>
+                  <button
+                    onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                    className="flex items-center gap-2.5 p-1 pl-3.5 pr-2 rounded-full bg-slate-900/90 border border-gold-500/40 text-white hover:border-gold-400 transition-all cursor-pointer shadow-lg"
+                  >
+                    <span className="text-xs font-bold max-w-[110px] truncate text-slate-100">
+                      {user.name?.split(' ')[0] || 'Account'}
+                    </span>
+                    {user.image ? (
+                      <Image
+                        src={user.image}
+                        alt={user.name || 'User'}
+                        width={30}
+                        height={30}
+                        className="rounded-full border border-gold-400 object-cover"
+                      />
+                    ) : (
+                      <div className="w-7 h-7 rounded-full bg-gold-500/20 border border-gold-500/40 flex items-center justify-center text-gold-400 text-xs font-bold">
+                        {user.name?.[0] || 'U'}
                       </div>
+                    )}
+                  </button>
 
-                      <Link
-                        href="/portal"
-                        onClick={() => setUserDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2.5 hover:bg-slate-800 text-slate-200 hover:text-gold-400 transition-colors font-medium"
+                  {/* User Dropdown */}
+                  <AnimatePresence>
+                    {userDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        className="absolute right-0 mt-2 w-64 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl py-2 z-50 text-slate-200 text-sm"
                       >
-                        <LayoutDashboard className="w-4 h-4 text-gold-400" />
-                        <span>Investor Portal</span>
-                      </Link>
+                        <div className="px-4 py-3 border-b border-slate-800/80">
+                          <p className="font-bold text-white truncate">{user.name}</p>
+                          <p className="text-xs text-slate-400 truncate">{user.email}</p>
+                          <span className="inline-block mt-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-gold-500/20 text-gold-400 border border-gold-500/30 uppercase tracking-wider">
+                            {isAdmin ? 'ADMIN' : (user.role || 'CUSTOMER')}
+                          </span>
+                        </div>
 
-                      {(user.role === 'ADMIN' || user.role === 'ADVISOR') && (
                         <Link
-                          href="/advisor"
-                          onClick={() => setUserDropdownOpen(false)}
-                          className="flex items-center gap-2.5 px-4 py-2.5 hover:bg-slate-800 text-slate-200 hover:text-blue-400 transition-colors font-medium"
-                        >
-                          <UserIcon className="w-4 h-4 text-blue-400" />
-                          <span>Advisor Console</span>
-                        </Link>
-                      )}
-
-                      {user.role === 'ADMIN' && (
-                        <Link
-                          href="/admin"
+                          href="/portal"
                           onClick={() => setUserDropdownOpen(false)}
                           className="flex items-center gap-2.5 px-4 py-2.5 hover:bg-slate-800 text-slate-200 hover:text-gold-400 transition-colors font-medium"
                         >
-                          <Shield className="w-4 h-4 text-gold-400" />
-                          <span>Admin Console</span>
+                          <LayoutDashboard className="w-4 h-4 text-gold-400" />
+                          <span>Investor Portal</span>
                         </Link>
-                      )}
 
-                      <button
-                        onClick={() => {
-                          setUserDropdownOpen(false);
-                          signOut({ callbackUrl: '/' });
-                        }}
-                        className="w-full text-left flex items-center gap-2.5 px-4 py-2.5 hover:bg-red-950/50 text-red-400 transition-colors border-t border-slate-800 mt-1 cursor-pointer font-medium"
-                      >
-                        <LogOut className="w-4 h-4" />
-                        <span>Sign Out</span>
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                        {(isAdmin || user.role === 'ADVISOR') && (
+                          <Link
+                            href="/advisor"
+                            onClick={() => setUserDropdownOpen(false)}
+                            className="flex items-center gap-2.5 px-4 py-2.5 hover:bg-slate-800 text-slate-200 hover:text-blue-400 transition-colors font-medium"
+                          >
+                            <UserIcon className="w-4 h-4 text-blue-400" />
+                            <span>Advisor Console</span>
+                          </Link>
+                        )}
+
+                        {isAdmin && (
+                          <Link
+                            href="/admin"
+                            onClick={() => setUserDropdownOpen(false)}
+                            className="flex items-center gap-2.5 px-4 py-2.5 bg-gold-500/10 hover:bg-gold-500/20 text-gold-300 font-bold transition-colors border-y border-gold-500/20 my-1"
+                          >
+                            <Shield className="w-4 h-4 text-gold-400" />
+                            <span>Admin Console</span>
+                          </Link>
+                        )}
+
+                        <button
+                          onClick={() => {
+                            setUserDropdownOpen(false);
+                            signOut({ callbackUrl: '/' });
+                          }}
+                          className="w-full text-left flex items-center gap-2.5 px-4 py-2.5 hover:bg-red-950/50 text-red-400 transition-colors border-t border-slate-800 mt-1 cursor-pointer font-medium"
+                        >
+                          <LogOut className="w-4 h-4" />
+                          <span>Sign Out</span>
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             ) : (
               <div className="hidden md:flex items-center gap-3">
@@ -436,7 +454,56 @@ export default function Navbar() {
 
               {/* Mobile CTA Section */}
               <div className="p-5 mt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
-                {status !== 'authenticated' && (
+                {status === 'authenticated' && user ? (
+                  <div className="space-y-2.5 mb-3 p-3.5 rounded-2xl bg-slate-900 border border-slate-800 text-white">
+                    <div className="flex items-center justify-between pb-2 border-b border-slate-800">
+                      <div className="truncate pr-2">
+                        <p className="text-xs font-bold text-white truncate">{user.name}</p>
+                        <p className="text-[11px] text-slate-400 truncate">{user.email}</p>
+                      </div>
+                      <span className="shrink-0 px-2 py-0.5 rounded-full text-[10px] font-black bg-gold-500/20 text-gold-400 border border-gold-500/30 uppercase">
+                        {isAdmin ? 'ADMIN' : (user.role || 'CUSTOMER')}
+                      </span>
+                    </div>
+
+                    <Link
+                      href="/portal"
+                      onClick={toggleMobile}
+                      className="flex items-center justify-between px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors"
+                    >
+                      <span className="flex items-center gap-2">
+                        <LayoutDashboard size={14} className="text-gold-400" />
+                        <span>Investor Portal</span>
+                      </span>
+                      <span>→</span>
+                    </Link>
+
+                    {isAdmin && (
+                      <Link
+                        href="/admin"
+                        onClick={toggleMobile}
+                        className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-gradient-to-r from-gold-500 to-amber-500 text-slate-950 text-xs font-black shadow-md transition-all"
+                      >
+                        <span className="flex items-center gap-2">
+                          <Shield size={14} className="text-slate-950" />
+                          <span>Admin Console</span>
+                        </span>
+                        <span>→</span>
+                      </Link>
+                    )}
+
+                    <button
+                      onClick={() => {
+                        toggleMobile();
+                        signOut({ callbackUrl: '/' });
+                      }}
+                      className="w-full flex items-center justify-center gap-2 text-xs font-semibold text-red-400 hover:text-red-300 pt-1 cursor-pointer"
+                    >
+                      <LogOut size={13} />
+                      <span>Sign Out</span>
+                    </button>
+                  </div>
+                ) : (
                   <Button asChild variant="outline" className="w-full h-12 rounded-xl border-gold-500/50 text-gold-600 dark:text-gold-400 hover:bg-gold-500/10 font-bold">
                     <Link href="/login" onClick={toggleMobile}>
                       <LogIn size={16} className="mr-2" />

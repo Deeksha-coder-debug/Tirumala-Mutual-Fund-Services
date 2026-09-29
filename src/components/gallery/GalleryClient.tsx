@@ -8,6 +8,7 @@ import { Play, Award, ShieldCheck, MapPin } from 'lucide-react';
 import { GalleryItem } from '@/lib/cms-data';
 import { Masonry } from '@/components/ui/masonry';
 import { Lightbox } from '@/components/gallery/Lightbox';
+import { getYoutubeThumbnail, isYoutubeUrl } from '@/lib/youtube';
 
 interface GalleryClientProps {
   items: GalleryItem[];
@@ -60,51 +61,62 @@ export default function GalleryClient({ items }: GalleryClientProps) {
 
       {/* Grid */}
       <Masonry breakpointCols={{ default: 3, 1024: 3, 768: 2, 640: 1 }}>
-        {filteredItems.map((item, index) => (
-          <motion.div
-            key={item.id}
-            layout
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.3 }}
-            className="group cursor-pointer relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 shadow-lg hover:shadow-2xl hover:border-gold-500/40 transition-all"
-            onClick={() => openLightbox(index)}
-          >
-            {/* Image Container */}
-            <div className="relative w-full aspect-[4/3] overflow-hidden">
-              <Image
-                src={item.imageUrl}
-                alt={item.title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
-              
-              {/* Overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
-              {/* Video Icon */}
-              {item.type === 'video' && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center ring-1 ring-white/50 group-hover:bg-primary-600 transition-colors duration-300">
-                    <Play className="text-white fill-white ml-1" size={24} />
-                  </div>
-                </div>
-              )}
+        {filteredItems.map((item, index) => {
+          const cardImage = item.imageUrl || getYoutubeThumbnail(item.youtubeUrl || item.videoUrl) || '/images/default.jpg';
+          const hasYt = !!item.youtubeUrl || isYoutubeUrl(item.videoUrl);
+          const isVideo = item.type === 'video' || hasYt || item.imageUrl?.endsWith('.mp4');
 
-              {/* Badges */}
-              <div className="absolute top-4 left-4 flex gap-2">
-                <span className="bg-black/60 backdrop-blur-md text-white px-2.5 py-1 rounded text-xs font-semibold tracking-wide uppercase">
-                  {item.category}
-                </span>
-                {item.type === 'video' && item.metrics && (
-                  <span className="bg-red-600/90 backdrop-blur-md text-white px-2.5 py-1 rounded text-xs font-semibold">
-                    {item.metrics}
-                  </span>
+          return (
+            <motion.div
+              key={item.id}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              className="group cursor-pointer relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 shadow-lg hover:shadow-2xl hover:border-gold-500/40 transition-all"
+              onClick={() => openLightbox(index)}
+            >
+              {/* Image Container */}
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
+                <Image
+                  src={cardImage}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                
+                {/* Overlays */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                {/* Video Icon */}
+                {isVideo && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center ring-1 ring-white/50 group-hover:bg-red-600 transition-colors duration-300 shadow-xl">
+                      <Play className="text-white fill-white ml-1" size={24} />
+                    </div>
+                  </div>
                 )}
+
+                {/* Badges */}
+                <div className="absolute top-4 left-4 flex flex-wrap gap-1.5">
+                  <span className="bg-black/60 backdrop-blur-md text-white px-2.5 py-1 rounded text-xs font-semibold tracking-wide uppercase">
+                    {item.category}
+                  </span>
+                  {hasYt && (
+                    <span className="bg-red-600/90 backdrop-blur-md text-white px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
+                      <Play size={10} className="fill-white" />
+                      YouTube
+                    </span>
+                  )}
+                  {item.type === 'video' && item.metrics && (
+                    <span className="bg-amber-600/90 backdrop-blur-md text-white px-2.5 py-1 rounded text-xs font-semibold">
+                      {item.metrics}
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
 
             {/* Content for Premium Cards (Awards/Certificates/Events) */}
             <div className="p-5 absolute bottom-0 left-0 w-full translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
@@ -131,7 +143,8 @@ export default function GalleryClient({ items }: GalleryClientProps) {
               </div>
             </div>
           </motion.div>
-        ))}
+        );
+      })}
       </Masonry>
 
       {/* Lightbox */}
