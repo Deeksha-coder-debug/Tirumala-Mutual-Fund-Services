@@ -2,7 +2,7 @@
 
 import React, { useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, Download, Share2, ZoomIn } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Download, Share2, ZoomIn, FileText } from 'lucide-react';
 import Image from 'next/image';
 import { GalleryItem } from '@/lib/cms-data';
 import { getYoutubeEmbedUrl, getYoutubeThumbnail } from '@/lib/youtube';
@@ -90,7 +90,7 @@ export function Lightbox({ item, isOpen, onClose, onNext, onPrev }: LightboxProp
           <X size={24} />
         </button>
 
-        <div className="absolute top-6 left-6 flex gap-3 z-10">
+        <div className="absolute top-6 left-6 flex items-center gap-3 z-10">
           <button onClick={handleShare} className="p-2 text-white/70 hover:text-white bg-black/50 hover:bg-black/80 rounded-full transition-all" title="Share" aria-label="Share">
             <Share2 size={20} />
           </button>
@@ -98,6 +98,19 @@ export function Lightbox({ item, isOpen, onClose, onNext, onPrev }: LightboxProp
             <button onClick={handleDownload} className="p-2 text-white/70 hover:text-white bg-black/50 hover:bg-black/80 rounded-full transition-all" title="Download" aria-label="Download">
               <Download size={20} />
             </button>
+          )}
+          {item.pdfUrl && (
+            <a
+              href={item.pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="flex items-center gap-1.5 px-3 py-1.5 text-white bg-rose-600 hover:bg-rose-700 rounded-full transition-all text-xs font-bold shadow-lg"
+              title="Download PDF Document"
+            >
+              <FileText size={16} />
+              <span>Download PDF</span>
+            </a>
           )}
         </div>
 
@@ -158,6 +171,18 @@ export function Lightbox({ item, isOpen, onClose, onNext, onPrev }: LightboxProp
               <span>• {new Date(item.publishDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
               {item.metrics && <span className="text-gold-400 font-medium">• {item.metrics}</span>}
             </div>
+            {item.pdfUrl && (
+              <a
+                href={item.pdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+                className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full text-xs text-rose-300 hover:text-white font-medium transition-all"
+              >
+                <FileText size={12} />
+                <span>Download Attached Document ({item.pdfName || 'PDF'})</span>
+              </a>
+            )}
           </div>
         </div>
       </motion.div>

@@ -9,8 +9,8 @@ export interface GalleryItem {
   id: string;
   slug: string;
   title: string;
-  category: 'Events' | 'Seminars' | 'Client Meets' | 'Awards' | 'Certificates' | 'Office' | 'Media' | 'Videos' | 'Posters';
-  type: 'image' | 'video' | 'album';
+  category: 'Events' | 'Seminars' | 'Client Meets' | 'Awards' | 'Certificates' | 'Office' | 'Media' | 'Videos' | 'Posters' | 'Documents';
+  type: 'image' | 'video' | 'album' | 'document';
   status: ContentStatus;
   publishDate: string;
   location?: string;
@@ -18,6 +18,8 @@ export interface GalleryItem {
   imageUrl?: string;
   videoUrl?: string; // MP4 or external video
   youtubeUrl?: string; // YouTube watch or share URL
+  pdfUrl?: string; // Uploaded PDF document URL
+  pdfName?: string; // PDF display name / label
   description?: string;
   featured?: boolean;
   downloadable?: boolean;
@@ -51,6 +53,8 @@ export interface NewsItem {
   listingDate?: string;
 
   // Documents
+  pdfUrl?: string; // Primary attached PDF document (e.g. SID, KIM, brochure)
+  pdfName?: string; // Document label
   documents?: {
     label: string; // e.g., "SID", "KIM", "Factsheet"
     url: string;

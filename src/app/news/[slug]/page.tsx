@@ -237,26 +237,38 @@ export default async function NewsItemPage({ params }: NewsItemPageProps) {
               />
 
               {/* Downloads Section */}
-              {item.documents && item.documents.length > 0 && (
-                <div className="bg-primary-50 dark:bg-gray-900/80 rounded-2xl p-6 md:p-8 mb-12 border border-primary-100 dark:border-gray-700">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                    <FileText className="text-primary-600 dark:text-gold-400" />
-                    Download Centre
-                  </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {item.documents.map((doc, idx) => (
-                      <a 
-                        key={idx} 
-                        href={doc.url}
-                        className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-xl hover:shadow-md transition-shadow group border border-gray-100 dark:border-gray-700"
-                      >
-                        <span className="font-medium text-gray-800 dark:text-gray-200">{doc.label}</span>
-                        <Download size={18} className="text-primary-500 group-hover:text-primary-700 dark:text-gray-400 dark:group-hover:text-gold-400" />
-                      </a>
-                    ))}
+              {((item.documents && item.documents.length > 0) || item.pdfUrl) && (() => {
+                const combinedDocs = [
+                  ...(item.documents || []),
+                  ...(item.pdfUrl && (!item.documents || !item.documents.some((d) => d.url === item.pdfUrl))
+                    ? [{ label: item.pdfName || 'Scheme Information Document (PDF)', url: item.pdfUrl }]
+                    : [])
+                ];
+
+                return (
+                  <div className="bg-primary-50 dark:bg-gray-900/80 rounded-2xl p-6 md:p-8 mb-12 border border-primary-100 dark:border-gray-700">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                      <FileText className="text-primary-600 dark:text-gold-400" />
+                      Download Centre
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {combinedDocs.map((doc, idx) => (
+                        <a 
+                          key={idx} 
+                          href={doc.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          download
+                          className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-xl hover:shadow-md transition-shadow group border border-gray-100 dark:border-gray-700"
+                        >
+                          <span className="font-medium text-gray-800 dark:text-gray-200">{doc.label}</span>
+                          <Download size={18} className="text-primary-500 group-hover:text-primary-700 dark:text-gray-400 dark:group-hover:text-gold-400" />
+                        </a>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                );
+              })()}
 
               {/* Tags */}
               <div className="flex flex-wrap items-center gap-2 mt-8 pt-8 border-t border-gray-100 dark:border-gray-700">

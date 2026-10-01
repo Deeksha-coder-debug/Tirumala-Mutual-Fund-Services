@@ -14,18 +14,24 @@ const riskColors = {
 export function NfoCard({ item }: { item: NewsItem }) {
   const isClosingSoon = item.closeDate && !isNaN(new Date(item.closeDate).getTime()) && new Date(item.closeDate).getTime() - new Date().getTime() < 3 * 24 * 60 * 60 * 1000;
   const hasVideo = !!item.youtubeUrl || (item.videoUrl && item.videoUrl.includes('youtu'));
+  const hasPdf = !!item.pdfUrl || (item.documents && item.documents.length > 0);
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden flex flex-col h-full hover:shadow-xl transition-all">
       <div className="p-6 flex-1 flex flex-col">
         <div className="flex justify-between items-center gap-2 mb-4 flex-wrap">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="bg-primary-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
               {item.category}
             </span>
             {hasVideo && (
               <span className="inline-flex items-center gap-1 text-[11px] font-bold text-red-600 bg-red-50 dark:bg-red-950/40 px-2 py-0.5 rounded-full border border-red-200 dark:border-red-900/40">
                 <Play size={10} className="fill-red-600" /> Video
+              </span>
+            )}
+            {hasPdf && (
+              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 bg-rose-50 dark:bg-rose-950/40 px-2 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/40">
+                <FileText size={10} /> PDF SID/KIM
               </span>
             )}
           </div>
@@ -77,18 +83,24 @@ export function NfoCard({ item }: { item: NewsItem }) {
 
 export function IpoCard({ item }: { item: NewsItem }) {
   const hasVideo = !!item.youtubeUrl || (item.videoUrl && item.videoUrl.includes('youtu'));
+  const hasPdf = !!item.pdfUrl || (item.documents && item.documents.length > 0);
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden flex flex-col h-full hover:shadow-xl transition-all">
       <div className="p-6 flex-1 flex flex-col">
         <div className="flex justify-between items-center gap-2 mb-4 flex-wrap">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="bg-gold-500 text-slate-950 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
               {item.category}
             </span>
             {hasVideo && (
               <span className="inline-flex items-center gap-1 text-[11px] font-bold text-red-600 bg-red-50 dark:bg-red-950/40 px-2 py-0.5 rounded-full border border-red-200 dark:border-red-900/40">
                 <Play size={10} className="fill-red-600" /> Video
+              </span>
+            )}
+            {hasPdf && (
+              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 bg-rose-50 dark:bg-rose-950/40 px-2 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/40">
+                <FileText size={10} /> PDF Document
               </span>
             )}
           </div>

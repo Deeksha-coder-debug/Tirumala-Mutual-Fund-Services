@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Play, Award, ShieldCheck, MapPin } from 'lucide-react';
+import { Play, Award, ShieldCheck, MapPin, FileText } from 'lucide-react';
 import { GalleryItem } from '@/lib/cms-data';
 import { Masonry } from '@/components/ui/masonry';
 import { Lightbox } from '@/components/gallery/Lightbox';
@@ -14,7 +14,7 @@ interface GalleryClientProps {
   items: GalleryItem[];
 }
 
-const CATEGORIES = ['All', 'Events', 'Seminars', 'Client Meets', 'Awards', 'Certificates', 'Office', 'Media', 'Videos', 'Posters'];
+const CATEGORIES = ['All', 'Events', 'Seminars', 'Client Meets', 'Awards', 'Certificates', 'Documents', 'Office', 'Media', 'Videos', 'Posters'];
 
 export default function GalleryClient({ items }: GalleryClientProps) {
   const [filter, setFilter] = useState('All');
@@ -115,6 +115,12 @@ export default function GalleryClient({ items }: GalleryClientProps) {
                       {item.metrics}
                     </span>
                   )}
+                  {item.pdfUrl && (
+                    <span className="bg-rose-600/90 backdrop-blur-md text-white px-2 py-0.5 rounded text-[10px] font-bold tracking-wider flex items-center gap-1">
+                      <FileText size={10} />
+                      PDF
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -138,6 +144,12 @@ export default function GalleryClient({ items }: GalleryClientProps) {
                   <div className="flex items-center gap-1 text-green-400">
                     <ShieldCheck size={12} />
                     <span>Official</span>
+                  </div>
+                )}
+                {item.pdfUrl && (
+                  <div className="flex items-center gap-1 text-rose-300 font-semibold">
+                    <FileText size={12} />
+                    <span>Document PDF</span>
                   </div>
                 )}
               </div>

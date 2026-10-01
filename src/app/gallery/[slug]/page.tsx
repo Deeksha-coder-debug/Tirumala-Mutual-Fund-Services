@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, MapPin, Calendar, Users, Award, ShieldCheck, Download, Share2 } from 'lucide-react';
+import { ArrowLeft, MapPin, Calendar, Users, Award, ShieldCheck, Download, Share2, FileText } from 'lucide-react';
 import { getGalleryItems } from '@/lib/cms-storage';
 import { SectionHeading } from '@/components/ui/section-heading';
 import PublicSiteShell from '@/components/layout/PublicSiteShell';
@@ -114,7 +114,20 @@ export default async function GalleryItemPage({ params }: GalleryItemPageProps) 
                 </span>
                 
                 {/* Share/Download Actions - Client Side functionality ideally, mocked here */}
-                <div className="flex gap-3">
+                <div className="flex items-center gap-3">
+                  {item.pdfUrl && (
+                    <a
+                      href={item.pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download
+                      className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition-all shadow-md"
+                      title="Download Attached PDF"
+                    >
+                      <FileText size={14} />
+                      <span>Download PDF</span>
+                    </a>
+                  )}
                   {item.downloadable && (
                     <button className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-gold-400 transition-colors">
                       <Download size={16} />
@@ -156,6 +169,32 @@ export default async function GalleryItemPage({ params }: GalleryItemPageProps) 
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
                     {item.description}
                   </p>
+                </div>
+              )}
+
+              {/* Dedicated PDF Document Card */}
+              {item.pdfUrl && (
+                <div className="mt-8 p-6 bg-slate-900 border border-slate-700/80 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-500 shrink-0">
+                      <FileText size={24} />
+                    </div>
+                    <div>
+                      <span className="text-[11px] font-bold text-rose-400 uppercase tracking-wider block">Official Document</span>
+                      <h4 className="text-white font-bold text-base leading-snug">{item.pdfName || 'Scheme / Event Document (PDF)'}</h4>
+                      <p className="text-slate-400 text-xs mt-0.5">Click download to inspect the full prospectus, circular, or presentation.</p>
+                    </div>
+                  </div>
+                  <a
+                    href={item.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold-500 to-amber-600 text-slate-950 font-extrabold text-sm hover:brightness-110 shadow-lg transition-all shrink-0 cursor-pointer"
+                  >
+                    <Download size={16} />
+                    <span>Download PDF</span>
+                  </a>
                 </div>
               )}
             </div>

@@ -45,6 +45,8 @@ export default function AdminPage() {
   const [newGalleryCategory, setNewGalleryCategory] = useState<GalleryItem['category']>('Events');
   const [newGalleryUrl, setNewGalleryUrl] = useState('');
   const [newGalleryYoutubeUrl, setNewGalleryYoutubeUrl] = useState('');
+  const [newGalleryPdfUrl, setNewGalleryPdfUrl] = useState('');
+  const [newGalleryPdfName, setNewGalleryPdfName] = useState('');
   const [newGalleryDesc, setNewGalleryDesc] = useState('');
   const [newGalleryLocation, setNewGalleryLocation] = useState('');
 
@@ -56,6 +58,8 @@ export default function AdminPage() {
   const [newNewsContent, setNewNewsContent] = useState('');
   const [newNewsImageUrl, setNewNewsImageUrl] = useState('');
   const [newNewsYoutubeUrl, setNewNewsYoutubeUrl] = useState('');
+  const [newNewsPdfUrl, setNewNewsPdfUrl] = useState('');
+  const [newNewsPdfName, setNewNewsPdfName] = useState('');
   const [newNewsStartDate, setNewNewsStartDate] = useState('');
   const [newNewsCloseDate, setNewNewsCloseDate] = useState('');
   const [newNewsRiskLevel, setNewNewsRiskLevel] = useState<NewsItem['riskLevel']>('Moderate');
@@ -73,6 +77,8 @@ export default function AdminPage() {
   const [broadcastCloseDate, setBroadcastCloseDate] = useState('15th October 2026');
   const [broadcastMinSip, setBroadcastMinSip] = useState('500');
   const [broadcastCustomMsg, setBroadcastCustomMsg] = useState('');
+  const [broadcastDocUrl, setBroadcastDocUrl] = useState('');
+  const [broadcastDocName, setBroadcastDocName] = useState('');
   const [broadcastFilter, setBroadcastFilter] = useState<'all' | 'sip' | 'nfo'>('all');
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [isSendingEmail, setIsSendingEmail] = useState(false);
@@ -118,6 +124,8 @@ export default function AdminPage() {
     setNewGalleryCategory(item.category);
     setNewGalleryUrl(item.imageUrl || '');
     setNewGalleryYoutubeUrl(item.youtubeUrl || (item.videoUrl && item.videoUrl.includes('youtu') ? item.videoUrl : ''));
+    setNewGalleryPdfUrl(item.pdfUrl || '');
+    setNewGalleryPdfName(item.pdfName || '');
     setNewGalleryLocation(item.location || '');
     setNewGalleryDesc(item.description || '');
   };
@@ -128,6 +136,8 @@ export default function AdminPage() {
     setNewGalleryCategory('Events');
     setNewGalleryUrl('');
     setNewGalleryYoutubeUrl('');
+    setNewGalleryPdfUrl('');
+    setNewGalleryPdfName('');
     setNewGalleryLocation('');
     setNewGalleryDesc('');
   };
@@ -138,9 +148,10 @@ export default function AdminPage() {
 
     // Use uploaded image, or extract YouTube thumbnail, or default
     const ytThumb = getYoutubeThumbnail(newGalleryYoutubeUrl);
-    const effectiveImage = newGalleryUrl || ytThumb || '/images/default.jpg';
+    const effectiveImage = newGalleryUrl || ytThumb || (newGalleryPdfUrl ? '/images/document-placeholder.jpg' : '/images/default.jpg');
     const hasYt = !!newGalleryYoutubeUrl && isYoutubeUrl(newGalleryYoutubeUrl);
     const isVideo = hasYt || newGalleryUrl.endsWith('.mp4') || newGalleryCategory === 'Videos';
+    const isDoc = !!newGalleryPdfUrl || newGalleryCategory === 'Documents';
 
     let itemToSave: GalleryItem;
 
@@ -151,13 +162,15 @@ export default function AdminPage() {
         slug: existing?.slug || newGalleryTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
         title: newGalleryTitle,
         category: newGalleryCategory,
-        type: isVideo ? 'video' : 'image',
+        type: isDoc ? 'document' : (isVideo ? 'video' : 'image'),
         status: existing?.status || 'published',
         publishDate: existing?.publishDate || new Date().toISOString(),
         location: newGalleryLocation || 'Jeypore, Odisha',
         imageUrl: effectiveImage,
         videoUrl: newGalleryUrl.endsWith('.mp4') ? newGalleryUrl : (hasYt ? newGalleryYoutubeUrl : existing?.videoUrl),
         youtubeUrl: newGalleryYoutubeUrl || undefined,
+        pdfUrl: newGalleryPdfUrl || undefined,
+        pdfName: newGalleryPdfName || (newGalleryPdfUrl ? 'Document (PDF)' : undefined),
         description: newGalleryDesc || existing?.description || 'Uploaded via TMFS Director Console.',
         featured: existing?.featured ?? true,
         downloadable: existing?.downloadable ?? true,
@@ -171,13 +184,15 @@ export default function AdminPage() {
         slug: newGalleryTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
         title: newGalleryTitle,
         category: newGalleryCategory,
-        type: isVideo ? 'video' : 'image',
+        type: isDoc ? 'document' : (isVideo ? 'video' : 'image'),
         status: 'published',
         publishDate: new Date().toISOString(),
         location: newGalleryLocation || 'Jeypore, Odisha',
         imageUrl: effectiveImage,
         videoUrl: newGalleryUrl.endsWith('.mp4') ? newGalleryUrl : undefined,
         youtubeUrl: newGalleryYoutubeUrl || undefined,
+        pdfUrl: newGalleryPdfUrl || undefined,
+        pdfName: newGalleryPdfName || (newGalleryPdfUrl ? 'Document (PDF)' : undefined),
         description: newGalleryDesc || 'Uploaded via TMFS Director Console.',
         featured: true,
         downloadable: true,
@@ -227,6 +242,8 @@ export default function AdminPage() {
     setNewNewsContent(item.content ? item.content.replace(/<[^>]*>/g, '') : '');
     setNewNewsImageUrl(item.imageUrl || '');
     setNewNewsYoutubeUrl(item.youtubeUrl || '');
+    setNewNewsPdfUrl(item.pdfUrl || (item.documents && item.documents[0]?.url) || '');
+    setNewNewsPdfName(item.pdfName || (item.documents && item.documents[0]?.label) || '');
     setNewNewsStartDate(item.launchDate ? (item.launchDate.includes('T') ? item.launchDate.split('T')[0] : item.launchDate) : '');
     setNewNewsCloseDate(item.closeDate ? (item.closeDate.includes('T') ? item.closeDate.split('T')[0] : item.closeDate) : '');
     setNewNewsRiskLevel(item.riskLevel || 'Moderate');
@@ -243,6 +260,8 @@ export default function AdminPage() {
     setNewNewsContent('');
     setNewNewsImageUrl('');
     setNewNewsYoutubeUrl('');
+    setNewNewsPdfUrl('');
+    setNewNewsPdfName('');
     setNewNewsStartDate('');
     setNewNewsCloseDate('');
     setNewNewsRiskLevel('Moderate');
@@ -257,6 +276,10 @@ export default function AdminPage() {
 
     const ytThumb = getYoutubeThumbnail(newNewsYoutubeUrl);
     const effectiveImage = newNewsImageUrl || ytThumb || undefined;
+
+    const docs = newNewsPdfUrl
+      ? [{ label: newNewsPdfName || 'Scheme Information Document (PDF)', url: newNewsPdfUrl }]
+      : undefined;
 
     let itemToSave: NewsItem;
 
@@ -276,6 +299,9 @@ export default function AdminPage() {
         tags: existing?.tags || ['TMFS', newNewsCategory],
         imageUrl: effectiveImage || existing?.imageUrl,
         youtubeUrl: newNewsYoutubeUrl || undefined,
+        pdfUrl: newNewsPdfUrl || undefined,
+        pdfName: newNewsPdfName || (newNewsPdfUrl ? 'Scheme Information Document (PDF)' : undefined),
+        documents: docs || existing?.documents,
         featured: existing?.featured ?? true,
         launchDate: newNewsStartDate || existing?.launchDate,
         closeDate: newNewsCloseDate || existing?.closeDate,
@@ -302,6 +328,9 @@ export default function AdminPage() {
         tags: ['TMFS', newNewsCategory],
         imageUrl: effectiveImage,
         youtubeUrl: newNewsYoutubeUrl || undefined,
+        pdfUrl: newNewsPdfUrl || undefined,
+        pdfName: newNewsPdfName || (newNewsPdfUrl ? 'Scheme Information Document (PDF)' : undefined),
+        documents: docs,
         featured: true,
         launchDate: newNewsStartDate || undefined,
         closeDate: newNewsCloseDate || undefined,
@@ -382,14 +411,18 @@ export default function AdminPage() {
   // Generate personalized text for a recipient
   const getMessageForRecipient = (r: any) => {
     const name = r.fullName || 'Valued Investor';
+    const docText = broadcastDocUrl
+      ? `\n\n📄 *Attached Scheme / Advisory PDF:*\n${broadcastDocName || 'Scheme Document'}: ${broadcastDocUrl.startsWith('http') ? broadcastDocUrl : `https://tirumalamutualfunds.in${broadcastDocUrl}`}`
+      : '';
+
     if (campaignType === 'nfo') {
-      return `Dear ${name},\n\nGreetings from Tirumala Mutual Fund Services (ARN-144270).\n\n🚀 *New Fund Offer (NFO) Alert:*\n*${broadcastFundName}*\n\n📅 *Closing Date:* ${broadcastCloseDate}\n💰 *Minimum SIP:* ₹${broadcastMinSip}/month\n\nEarly NAV entry allows you to compound wealth steadily over market cycles. To view fund details or start your investment, visit https://tirumalamutualfunds.in/news or reply directly to speak with Sri Tirumala Talabaktula.\n\n_Mutual fund investments are subject to market risks. Read scheme documents carefully._`;
+      return `Dear ${name},\n\nGreetings from Tirumala Mutual Fund Services (ARN-144270).\n\n🚀 *New Fund Offer (NFO) Alert:*\n*${broadcastFundName}*\n\n📅 *Closing Date:* ${broadcastCloseDate}\n💰 *Minimum SIP:* ₹${broadcastMinSip}/month\n\nEarly NAV entry allows you to compound wealth steadily over market cycles. To view fund details or start your investment, visit https://tirumalamutualfunds.in/news or reply directly to speak with Sri Tirumala Talabaktula.${docText}\n\n_Mutual fund investments are subject to market risks. Read scheme documents carefully._`;
     } else if (campaignType === 'sip') {
-      return `Dear ${name},\n\nNamaste from Tirumala Mutual Fund Services (ARN-144270).\n\n⏰ *Monthly SIP Debit Reminder:*\nYour scheduled mutual fund installment of *${r.sipAmount || '₹5,000/month'}* is due on *${r.sipDate ? `${r.sipDate}th of this month` : 'your upcoming debit date'}* for *${r.fundName || 'Active SIP Portfolio'}*.\n\nKindly ensure your registered bank account has sufficient balance to maintain uninterrupted compounding and avoid bank mandate bounce charges.\n\nWarm regards,\n*Tirumala Mutual Fund Services*\nJeypore, Odisha • Call: +91 8763732389`;
+      return `Dear ${name},\n\nNamaste from Tirumala Mutual Fund Services (ARN-144270).\n\n⏰ *Monthly SIP Debit Reminder:*\nYour scheduled mutual fund installment of *${r.sipAmount || '₹5,000/month'}* is due on *${r.sipDate ? `${r.sipDate}th of this month` : 'your upcoming debit date'}* for *${r.fundName || 'Active SIP Portfolio'}*.\n\nKindly ensure your registered bank account has sufficient balance to maintain uninterrupted compounding and avoid bank mandate bounce charges.${docText}\n\nWarm regards,\n*Tirumala Mutual Fund Services*\nJeypore, Odisha • Call: +91 8763732389`;
     } else if (campaignType === 'tax') {
-      return `Dear ${name},\n\nTax-saving season reminder from Tirumala Mutual Fund Services (ARN-144270).\n\n💼 Save up to ₹46,800 in taxes under Section 80C with *ELSS Tax Saver Mutual Funds* (shortest 3-year lock-in with potential for long-term equity growth).\n\nContact Sri Tirumala Talabaktula today for a personalized tax-saving allocation.\nhttps://tirumalamutualfunds.in/#contact`;
+      return `Dear ${name},\n\nTax-saving season reminder from Tirumala Mutual Fund Services (ARN-144270).\n\n💼 Save up to ₹46,800 in taxes under Section 80C with *ELSS Tax Saver Mutual Funds* (shortest 3-year lock-in with potential for long-term equity growth).\n\nContact Sri Tirumala Talabaktula today for a personalized tax-saving allocation.${docText}\nhttps://tirumalamutualfunds.in/#contact`;
     } else {
-      return `Dear ${name},\n\n${broadcastCustomMsg || 'Important portfolio advisory update from Tirumala Mutual Fund Services.'}\n\nFor personalized assistance, contact Sri Tirumala Talabaktula, ARN-144270.\nhttps://tirumalamutualfunds.in`;
+      return `Dear ${name},\n\n${broadcastCustomMsg || 'Important portfolio advisory update from Tirumala Mutual Fund Services.'}${docText}\n\nFor personalized assistance, contact Sri Tirumala Talabaktula, ARN-144270.\nhttps://tirumalamutualfunds.in`;
     }
   };
 
@@ -418,6 +451,8 @@ export default function AdminPage() {
           closeDate: broadcastCloseDate,
           minSip: broadcastMinSip,
           customMessage: broadcastCustomMsg,
+          documentUrl: broadcastDocUrl || undefined,
+          documentName: broadcastDocName || undefined,
           recipients: filteredRecipients,
         }),
       });
@@ -908,6 +943,25 @@ export default function AdminPage() {
                       />
                     </div>
                   )}
+
+                  {/* Attach Document (PDF) for Broadcast */}
+                  <div className="pt-2 border-t border-slate-100">
+                    <label className="block !text-slate-700 font-bold mb-1">
+                      Attach Brochure / Circular (PDF) <span className="text-slate-400 font-normal">(Optional)</span>
+                    </label>
+                    <FileUploadDropzone
+                      accept="application/pdf"
+                      label="Upload Campaign PDF Document"
+                      currentUrl={broadcastDocUrl}
+                      onUploadSuccess={(url, info) => {
+                        setBroadcastDocUrl(url);
+                        setBroadcastDocName(info?.name || 'Brochure.pdf');
+                      }}
+                    />
+                    <p className="text-[10px] text-slate-500 mt-1 leading-snug">
+                      📄 When attached, a direct download link is automatically included in WhatsApp messages and email broadcasts.
+                    </p>
+                  </div>
                 </div>
 
                 {/* Live WhatsApp Preview */}
@@ -1081,6 +1135,7 @@ export default function AdminPage() {
                       <option value="Client Meets">Client Meets</option>
                       <option value="Awards">Awards</option>
                       <option value="Certificates">Certificates</option>
+                      <option value="Documents">Documents & Circulars</option>
                       <option value="Office">Office</option>
                       <option value="Videos">Videos</option>
                     </select>
@@ -1129,6 +1184,25 @@ export default function AdminPage() {
                     <p className="text-[10px] text-slate-500 mt-1 leading-snug">
                       💡 Tip: You can provide an uploaded cover photo, a YouTube video link, or both together.
                     </p>
+                  </div>
+
+                  {/* 3. PDF Document Attachment */}
+                  <div>
+                    <label className="block !text-slate-700 font-bold mb-1">
+                      Attach PDF Document <span className="text-slate-400 font-normal">(Brochure, Presentation, Certificate - Optional)</span>
+                    </label>
+                    <FileUploadDropzone
+                      label="Upload PDF Document"
+                      currentUrl={newGalleryPdfUrl}
+                      accept="application/pdf"
+                      onUploadSuccess={(url, info) => {
+                        setNewGalleryPdfUrl(url);
+                        setNewGalleryPdfName(info?.name || 'Document.pdf');
+                        if (newGalleryCategory === 'Events') {
+                          setNewGalleryCategory('Documents');
+                        }
+                      }}
+                    />
                   </div>
 
                   <div>
@@ -1228,6 +1302,17 @@ export default function AdminPage() {
                               <span className="px-1.5 py-0.5 rounded text-[9px] font-black bg-red-100 text-red-700 uppercase">
                                 YouTube
                               </span>
+                            )}
+                            {item.pdfUrl && (
+                              <a
+                                href={item.pdfUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-1.5 py-0.5 rounded text-[9px] font-black bg-rose-100 text-rose-800 uppercase flex items-center gap-0.5 hover:underline"
+                                title={item.pdfName || 'Download PDF Document'}
+                              >
+                                <FileText size={9} /> PDF
+                              </a>
                             )}
                           </div>
 
@@ -1345,6 +1430,22 @@ export default function AdminPage() {
                       value={newNewsYoutubeUrl}
                       onChange={(e) => setNewNewsYoutubeUrl(e.target.value)}
                       className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 !text-slate-950 font-medium focus:outline-none focus:border-amber-500"
+                    />
+                  </div>
+
+                  {/* 3. Scheme Document / Factsheet (PDF) */}
+                  <div>
+                    <label className="block !text-slate-700 font-bold mb-1">
+                      Scheme Document / Factsheet <span className="text-slate-400 font-normal">(PDF, KIM, SID - Optional)</span>
+                    </label>
+                    <FileUploadDropzone
+                      label="Upload Scheme Document (PDF)"
+                      currentUrl={newNewsPdfUrl}
+                      accept="application/pdf"
+                      onUploadSuccess={(url, info) => {
+                        setNewNewsPdfUrl(url);
+                        setNewNewsPdfName(info?.name || 'Scheme_Document.pdf');
+                      }}
                     />
                   </div>
 
@@ -1512,6 +1613,18 @@ export default function AdminPage() {
                               <Play size={9} className="fill-red-700" />
                               YouTube
                             </span>
+                          )}
+                          {(item.pdfUrl || (item.documents && item.documents.length > 0)) && (
+                            <a
+                              href={item.pdfUrl || item.documents?.[0]?.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800 uppercase flex items-center gap-1 hover:underline"
+                              title={item.pdfName || item.documents?.[0]?.label || 'Scheme Document PDF'}
+                            >
+                              <FileText size={9} />
+                              PDF Attached
+                            </a>
                           )}
                         </div>
                         <h4 className="font-bold !text-slate-950 text-sm mt-1">{item.title}</h4>

@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     ];
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json({ 
-        error: `File type ${file.type} is not supported. Please upload JPG, PNG, WebP, MP4, or WebM.` 
+        error: `File type ${file.type} is not supported. Please upload JPG, PNG, WebP, MP4, WebM, or PDF.` 
       }, { status: 400 });
     }
 
@@ -36,7 +36,11 @@ export async function POST(request: NextRequest) {
     await mkdir(uploadDir, { recursive: true });
 
     // Generate safe clean filename with timestamp
-    const ext = path.extname(file.name) || (file.type.startsWith('video') ? '.mp4' : '.jpg');
+    const ext = path.extname(file.name) || (
+      file.type.startsWith('video') ? '.mp4' : 
+      file.type === 'application/pdf' ? '.pdf' : 
+      '.jpg'
+    );
     const baseName = path.basename(file.name, ext).replace(/[^a-zA-Z0-9_-]/g, '_');
     const safeName = `${Date.now()}_${baseName}${ext}`;
     const filePath = path.join(uploadDir, safeName);
